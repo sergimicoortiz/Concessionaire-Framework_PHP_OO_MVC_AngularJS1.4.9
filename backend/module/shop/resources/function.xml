@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>list_cars</name>
+        <uri>list_cars</uri>
+    </function>
+    <function>
+        <name>list_brands</name>
+        <uri>list_brands</uri>
+    </function>
+    <function>
+        <name>list_category</name>
+        <uri>list_category</uri>
+    </function>
+    <function>
+        <name>list_fuels</name>
+        <uri>list_fuels</uri>
+    </function>
+    <function>
+        <name>list_city</name>
+        <uri>list_city</uri>
+    </function>
+    <function>
+        <name>count_cars</name>
+        <uri>count_cars</uri>
+    </function>
+    <function>
+        <name>list_cars_filters</name>
+        <uri>list_cars_filters</uri>
+    </function>
+    <function>
+        <name>details_car</name>
+        <uri>details_car</uri>
+    </function>
+    <function>
+        <name>get_user_likes</name>
+        <uri>get_user_likes</uri>
+    </function>
+    <function>
+        <name>user_like</name>
+        <uri>user_like</uri>
+    </function>
+</functions>
