@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <functions>
     <function>
-        <name>view</name>
-        <uri>view</uri>
+        <name>send_error</name>
+        <uri>send_error</uri>
     </function>
 </functions>

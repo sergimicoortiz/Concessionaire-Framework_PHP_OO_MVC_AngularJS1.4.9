@@ -2,9 +2,8 @@
 
 class controller_error
 {
-    function view()
+    function send_error()
     {
-        common::load_error($_GET['param']);
-        common::load_model('error_model', 'insert_error', [$_GET['param'], $_GET['param2']]);
+        common::load_model('error_model', 'insert_error', [$_GET['type'], $_GET['msg']]);
     }
 }//class
