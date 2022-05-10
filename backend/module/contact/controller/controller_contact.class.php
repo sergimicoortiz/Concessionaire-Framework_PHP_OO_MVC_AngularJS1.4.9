@@ -13,7 +13,7 @@ class controller_contact
         $email['to_email'] = 'sergimicoortiz@gmail.com';
         $email['subject'] = 'Conctact Concesionari';
         $email['text'] = null;
-        $email['html'] = '<h1>' . $_POST["matter"] . '</h1><h3>FROM: ' . $_POST["email"] . '(' . $_POST["name"] . ')</h3><h3>' . $_POST["message"] . '</h3>';
+        $email['html'] = '<h1>' . $_POST["asunto"] . '</h1><h3>FROM: ' . $_POST["email"] . '(' . $_POST["name"] . ')</h3><h3>' . $_POST["message"] . '</h3>';
         $email['custom_id'] = 'contact';
         $result = mail::send_email($email);
 

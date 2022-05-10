@@ -2,7 +2,7 @@
 //require_once('paths.php');
 //require_once('utils/common.inc.php');
 require_once('autoload.php');
-
+$_POST = json_decode(file_get_contents('php://input'), true);
 class router
 {
     private $uriModule;

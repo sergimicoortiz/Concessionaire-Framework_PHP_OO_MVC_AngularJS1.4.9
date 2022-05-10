@@ -16,13 +16,14 @@ app.factory("services", ['$http', '$q', function ($http, $q) {
         return promise;
     };
 
-    obj.get_api = function (url) {
+    obj.get = function (module, functi, dada) {
         var defered = $q.defer();
         var promise = defered.promise;
         $http({
             method: 'GET',
-            url: url
+            url: serviceBase + module + '&op=' + functi + '&param=' + dada
         }).success(function (data, status, headers, config) {
+            console.log(data);
             defered.resolve(data);
         }).error(function (data, status, headers, config) {
             defered.reject(data);
@@ -30,13 +31,14 @@ app.factory("services", ['$http', '$q', function ($http, $q) {
         return promise;
     };
 
-    obj.post = function (module, functi) {
+    obj.get = function (module, functi, dada, dada2) {
         var defered = $q.defer();
         var promise = defered.promise;
         $http({
-            method: 'POST',
-            url: serviceBase + module + '&op=' + functi
+            method: 'GET',
+            url: serviceBase + module + '&op=' + functi + '&param=' + dada + '&param2=' + dada2
         }).success(function (data, status, headers, config) {
+            //console.log(data);
             defered.resolve(data);
         }).error(function (data, status, headers, config) {
             defered.reject(data);
@@ -59,6 +61,35 @@ app.factory("services", ['$http', '$q', function ($http, $q) {
         return promise;
     };
 
-    return obj;
+    obj.put = function (module, functi, dada) {
+        var defered = $q.defer();
+        var promise = defered.promise;
+        $http({
+            method: 'PUT',
+            url: serviceBase + module + '&op=' + functi,
+            data: dada
+        }).success(function (data, status, headers, config) {
+            defered.resolve(data);
+        }).error(function (data, status, headers, config) {
+            defered.reject(data);
+        });
+        return promise;
+    };
 
+    obj.delete = function (module, functi, dada) {
+        var defered = $q.defer();
+        var promise = defered.promise;
+        $http({
+            method: 'DELETE',
+            url: serviceBase + module + '&op=' + functi + '&param=' + dada
+        }).success(function (data, status, headers, config) {
+            //console.log(data);
+            defered.resolve(data);
+        }).error(function (data, status, headers, config) {
+            defered.reject(data);
+        });
+        return promise;
+    };
+
+    return obj;
 }]);

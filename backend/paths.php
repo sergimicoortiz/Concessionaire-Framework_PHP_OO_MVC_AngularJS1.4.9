@@ -1,6 +1,6 @@
 <?php
 //PROJECT
-define('PROJECT', '/Concessionaire-Framework_PHP_OO_MVC_AngularJS1.4.9/');
+define('PROJECT', '/Concessionaire-Framework_PHP_OO_MVC_AngularJS1.4.9/backend/');
 
 //SITE_ROOT
 define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'] . PROJECT);
