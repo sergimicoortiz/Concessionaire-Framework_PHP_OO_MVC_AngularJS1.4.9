@@ -21,6 +21,7 @@ class error_bll
 
     function insert_error_BLL($args)
     {
+        //return $args;
         return $this->dao->insert_error($this->db, $args[0], $args[1]);
     } //end insert_error_BLL
 }//class

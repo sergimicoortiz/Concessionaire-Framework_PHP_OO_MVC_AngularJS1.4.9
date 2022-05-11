@@ -6,14 +6,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: "frontend/module/contact/view/contact.html",
             controller: "controller_contact"
         })//end contact
-        .when("/error/404", {
-            templateUrl: "frontend/module/error/view/404.html",
-           controller: "controller_error"
-        })//end error404
-        .when("/error/503", {
-            templateUrl: "frontend/module/error/view/503.html",
-           controller: "controller_error"
-        })//end error503
+        .when("/error/:error_type/:error_msg", {
+            templateUrl: "frontend/module/error/view/error.html",
+            controller: "controller_error"
+        })//end error
         .when("/home", {
             templateUrl: "frontend/module/home/view/home.html",
             controller: "controller_home",
@@ -29,19 +25,5 @@ app.config(['$routeProvider', function ($routeProvider) {
                 }//end fuels
             }//resolves
         })//end home
-        .otherwise("/home", {
-            templateUrl: "frontend/module/home/view/home.html",
-            controller: "controller_home",
-            resolve: {
-                brands: function (services) {
-                    return services.post('home', 'get_brands_rand');
-                },//end brand
-                categorys: function (services) {
-                    return services.post('home', 'get_category_rand');
-                },//end categorys
-                fuels: function (services) {
-                    return services.post('home', 'get_fuel_rand_eco');
-                }//end fuels
-            }//resolves
-        })//end default
+        .otherwise("/home")//end default
 }]);

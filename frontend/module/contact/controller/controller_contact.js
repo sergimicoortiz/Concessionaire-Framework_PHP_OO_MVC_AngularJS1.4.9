@@ -19,7 +19,8 @@ app.controller('controller_contact', function ($scope, services, toastr) {
                 }//end else if
             },
                 function (error) {
-                    console.log(error);
+                    var callback = "#/error/503/post_contact_sendemail_error";
+                    window.location.href = callback;
                 })//end post
     }//end send email
 });//end controller
