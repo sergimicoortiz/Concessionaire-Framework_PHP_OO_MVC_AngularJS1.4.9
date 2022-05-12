@@ -22,8 +22,11 @@ app.config(['$routeProvider', function ($routeProvider) {
                 },//end categorys
                 fuels: function (services) {
                     return services.post('home', 'get_fuel_rand_eco');
-                }//end fuels
+                },//end fuels
+                books: function (services) {
+                    return services.getUrl('https://www.googleapis.com/books/v1/volumes?q=electric%20cars');
+                }//end books
             }//resolves
         })//end home
         .otherwise("/home")//end default
-}]);
+}]);//end config

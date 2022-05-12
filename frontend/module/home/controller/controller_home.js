@@ -1,7 +1,15 @@
-app.controller('controller_home', function ($scope, services, toastr, brands, categorys, fuels) {
+app.controller('controller_home', function ($scope, $timeout, brands, categorys, fuels, books) {
+    loadIn();
     $scope.brands = brands;
     $scope.categorys = categorys;
     $scope.fuels = fuels;
+    var books_tmp = [];
+    books.items.forEach(book => {
+        if (book.volumeInfo.title.length > 0 && book.volumeInfo.pageCount > 0) {
+            books_tmp.push(book.volumeInfo);
+        }//end if
+    });//end foreach
+    $scope.books = books_tmp;
 
     $scope.callback_shop = function () {
         var data_fileters = [];
@@ -26,7 +34,7 @@ app.controller('controller_home', function ($scope, services, toastr, brands, ca
         console.log(data_fileters);
     }//end callback_shop
 
-    window.addEventListener('load', function () {
+    $timeout(function () {
         $('#slider').owlCarousel({
             items: 3,
             loop: true,
@@ -36,5 +44,6 @@ app.controller('controller_home', function ($scope, services, toastr, brands, ca
             autoplayTimeout: 4000,
             smartSpeed: 800
         });//end owlCarousel
-    })//end load
+        loadOut();
+    }, 1000);//end timeout
 });//end controller
