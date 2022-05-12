@@ -1,50 +1,23 @@
-function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            url: sUrl,
-            type: sType,
-            dataType: sTData,
-            data: sData
-        }).done((data) => {
-            resolve(data);
-        }).fail((jqXHR, textStatus, errorThrow) => {
-            reject(errorThrow);
-        });
-    });
-}//end ajaxPrimise
+function error_callback(error_msg, error_type = "503") {
+    var callback = "#/error/" + error_type + "/" + error_msg;
+    window.location.href = callback;
+}//end error_callback
 
-function loadIn(ms = 500, timeout = 0) {
+
+/* function loadIn(ms = 500, timeout = 0) {
     setTimeout(function () {
         $("#overlay").fadeIn(ms);
     }, timeout);
-};//end loadIn
+};//end loadIn */
 
 
-function loadOut(ms = 400, timeout = 400) {
+/* function loadOut(ms = 400, timeout = 400) {
     setTimeout(function () {
         $("#overlay").fadeOut(ms);
     }, timeout);
-};//end loadOut
+};//end loadOut */
 
-function friendlyURL(url) {
-    var link = "";
-    url = url.replace("?", "");
-    url = url.split("&");
-    cont = 0;
-    for (var i = 0; i < url.length; i++) {
-        cont++;
-        var aux = url[i].split("=");
-        if (cont == 2) {
-            link += "/" + aux[1] + "/";
-        } else {
-            link += "/" + aux[1];
-        }
-    }
-    //return "http://localhost/Concessionaire-Framework_PHP_OO_MVC_JQuery" + link;
-    return window.location.origin + "/Concessionaire-Framework_PHP_OO_MVC_JQuery" + link;
-}//end friendlyURL
-
-function user_info_menu() {
+/* unction user_info_menu() {
     if (localStorage.getItem('token')) {
         ajaxPromise(friendlyURL('?page=login&op=get_user_data'), 'POST', 'JSON', { 'token': localStorage.getItem('token') })
             .then(function (data) {
@@ -65,9 +38,9 @@ function user_info_menu() {
     } else {
         $('<a></a>').attr('href', friendlyURL('?page=login&op=view')).attr('data-tr', 'login').appendTo('#user_info').html('Login');
     }//end else if
-}//end user_ingo_menu
+}//end user_ingo_menu */
 
-function logout() {
+/* function logout() {
     ajaxPromise(friendlyURL('?page=login&op=logout'), 'POST', 'JSON')
         .then(function (data) {
             if (data == 'ok') {
@@ -81,9 +54,9 @@ function logout() {
             var callback = friendlyURL('?module=error&op=view&param=503&param2=logout_error_ajax');
             window.location.href = callback;
         })//end ajaxpromise
-}//end logout
+}//end logout */
 
-function user_timeout() {
+/* function user_timeout() {
     ajaxPromise(friendlyURL('?page=login&op=user_timeout'), 'POST', 'JSON')
         .then(function (data) {
             //console.log(data);
@@ -98,9 +71,9 @@ function user_timeout() {
             var callback = friendlyURL('?module=error&op=view&param=503&param2=user_timeout_error_ajax');
             window.location.href = callback;
         });//end ajaxptromise
-}//end user_timeout
+}//end user_timeout */
 
-function user_control() {
+/* function user_control() {
     ajaxPromise(friendlyURL('?page=login&op=user_control'), 'POST', 'JSON', { 'token': localStorage.getItem('token') })
         .then(function (data) {
             //console.log(data);
@@ -115,9 +88,9 @@ function user_control() {
             var callback = friendlyURL('?module=error&op=view&param=503&param2=user_control_error_ajax');
             window.location.href = callback;
         });//end ajaxptromise
-}//end user_control
+}//end user_control */
 
-function refresh_token_cookies() {
+/* function refresh_token_cookies() {
     ajaxPromise(friendlyURL('?page=login&op=refresh_token_cookies'), 'POST', 'JSON', { 'token': localStorage.getItem('token') })
         .then(function (data) {
             //console.log(data);
@@ -131,9 +104,9 @@ function refresh_token_cookies() {
             var callback = friendlyURL('?module=error&op=view&param=503&param2=refresh_token_error_ajax');
             window.location.href = callback;
         })//end ajaxpromise
-}//end refresh_token
+}//end refresh_token */
 
-$(document).ready(function () {
+/* $(document).ready(function () {
 
     toastr.options = {
         "preventDuplicates": true,
@@ -163,4 +136,4 @@ $(document).ready(function () {
     }
 
     user_info_menu();
-})//end ready
+})//end ready */
