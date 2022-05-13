@@ -1,4 +1,4 @@
-app.controller('controller_contact', function ($scope, services, toastr) {
+app.controller('controller_contact', function ($scope, $rootScope, services, toastr) {
     $scope.rex_asunto = /^[A-Za-z-\s]{6,60}$/;
     $scope.rex_name = /^[a-zA-Z]+[\-'\s]?[a-zA-Z]{2,51}$/;
     $scope.rex_msg = /^[A-Za-z0-9-\s.]{15,200}$/;
@@ -19,7 +19,7 @@ app.controller('controller_contact', function ($scope, services, toastr) {
                 }//end else if
             },
                 function (error) {
-                    error_callback("post_contact_sendemail_error");
+                    $rootScope.error_callback("post_contact_sendemail_error");
                 })//end post
     }//end send email
 });//end controller

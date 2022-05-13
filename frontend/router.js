@@ -30,3 +30,23 @@ app.config(['$routeProvider', function ($routeProvider) {
         })//end home
         .otherwise("/home")//end default
 }]);//end config
+
+app.run(function ($rootScope, $window) {
+
+    $rootScope.error_callback = function (error_msg, error_type = "503") {
+        var callback = "#/error/" + error_type + "/" + error_msg;
+        $window.location.href = callback;
+    }//end error_callback
+
+    $rootScope.loadIn = function (ms = 500, timeout = 0) {
+        setTimeout(function () {
+            $("#overlay").fadeIn(ms);
+        }, timeout);
+    }//end loadIn
+
+    $rootScope.loadOut = function (ms = 500, timeout = 500) {
+        setTimeout(function () {
+            $("#overlay").fadeOut(ms);
+        }, timeout);
+    }//end loadOut
+});//end run

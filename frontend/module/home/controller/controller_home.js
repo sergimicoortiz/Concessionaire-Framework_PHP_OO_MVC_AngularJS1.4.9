@@ -1,15 +1,45 @@
-app.controller('controller_home', function ($scope, $timeout, brands, categorys, fuels, books) {
-    loadIn();
+app.controller('controller_home', function ($scope, $rootScope, $timeout, brands, categorys, fuels, books) {
+    $rootScope.loadIn();
     $scope.brands = brands;
     $scope.categorys = categorys;
     $scope.fuels = fuels;
-    var books_tmp = [];
+
+    var books_all = [];
+    var books_group = [];
+    var book_cont = 1;
+
+
     books.items.forEach(book => {
-        if (book.volumeInfo.title.length > 0 && book.volumeInfo.pageCount > 0) {
-            books_tmp.push(book.volumeInfo);
+        if (book.volumeInfo.title.length > 0 && book.volumeInfo.pageCount > 0 && book.volumeInfo.description != undefined) {
+            const book_tmp = {
+                'link': book.volumeInfo.infoLink,
+                'title': book.volumeInfo.title,
+                'pages': book.volumeInfo.pageCount,
+                'desc': book.volumeInfo.description,
+                'img': book.volumeInfo.imageLinks.thumbnail
+            };
+            books_all.push(book_tmp);
         }//end if
-    });//end foreach
-    $scope.books = books_tmp;
+    });//end foreach 
+
+    const chunkSize = 4;
+    for (let i = 0; i < books_all.length; i += chunkSize) {
+        const chunk = books_all.slice(i, i + chunkSize);
+        books_group.push(chunk);
+    }//end for
+    //https://stackoverflow.com/questions/8495687/split-array-into-chunks  Thanks Google
+
+    $scope.books_group = books_group.slice(0, book_cont);
+    //console.log(books_group);
+
+    $scope.more_books = function () {
+        book_cont++;
+        if (book_cont = books_group.length) {
+            //console.log('No more books');
+            document.querySelector('#btn_more_books').remove();
+        }//end if
+        $scope.books_group = books_group.slice(0, book_cont);
+    }//end more books
 
     $scope.callback_shop = function () {
         var data_fileters = [];
@@ -39,11 +69,12 @@ app.controller('controller_home', function ($scope, $timeout, brands, categorys,
             items: 3,
             loop: true,
             margin: 10,
-            nav: false,
+            nav: true,
             autoplay: true,
             autoplayTimeout: 4000,
             smartSpeed: 800
         });//end owlCarousel
-        loadOut();
-    }, 1000);//end timeout
+        $rootScope.loadOut();
+    }, 0);//end timeout
+    //Sin el timeout no carga el slider, pero con el timeaut aunque este a 0ms si que funciona.
 });//end controller

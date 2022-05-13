@@ -23,8 +23,24 @@
         </div>
     </div>
     <p class="titels" data-tr="related_books">related books</p>
-    <div id="related_books"></div>
-    <div id="see_more_books_div"></div>
+    <div id="related_books">
+        <p>{{books.lenght}}</p>
+    </div>
+    <div id="see_more_books_div" class="block-1 box-1" ng-repeat="books in books_group">
+        <div ng-repeat="book in books" ng-class="{'last': $last}">
+            <img src="{{book.img}}">
+            <p class="text-1">{{book.title}}</p>
+            <p class="upper">
+                <b data-tr="pages">pages</b>: <span>{{book.pages}}</span>
+            </p>
+            <p class="upper">
+                <b data-tr="description">description</b>: <textarea rows=10 cols=25
+                    class="book_textarea">{{book.desc}}</textarea>
+            </p>
+            <a href="{{book.link}}" class="button" data-tr="See More">See More</a>
+        </div>
+    </div>
+    <span id="btn_more_books"><a data-tr="See More" class="button" ng-click="more_books()">See More</a></span>
 </section>
 
 <div id="overlay">
