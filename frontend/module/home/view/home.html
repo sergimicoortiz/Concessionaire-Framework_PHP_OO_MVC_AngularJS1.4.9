@@ -1,9 +1,11 @@
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <p class="titels" data-tr="brands">brands</p>
-<div id="slider" class="owl-carousel owl-theme">
-    <div class="item" ng-click="callback_shop()" ng-repeat="brand in brands">
-        <img src="{{brand.brand_img}}">
-    </div>
-</div>
+
+<carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+    <slide ng-repeat="brand in brands" active="slide.active">
+        <img src="{{brand.brand_img}}" ng-click="callback_shop()" style="margin:auto;">
+    </slide>
+</carousel>
 
 <section id="content">
     <p class="titels" data-tr="categorys">categorys</p>

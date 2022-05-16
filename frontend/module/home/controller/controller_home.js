@@ -1,13 +1,11 @@
-app.controller('controller_home', function ($scope, $rootScope, $timeout, brands, categorys, fuels, books) {
+app.controller('controller_home', function ($scope, $rootScope, $window, brands, categorys, fuels, books) {
     $rootScope.loadIn();
     $scope.brands = brands;
     $scope.categorys = categorys;
     $scope.fuels = fuels;
 
     var books_all = [];
-    var books_group = [];
     var book_cont = 1;
-
 
     books.items.forEach(book => {
         if (book.volumeInfo.title.length > 0 && book.volumeInfo.pageCount > 0 && book.volumeInfo.description != undefined) {
@@ -22,13 +20,7 @@ app.controller('controller_home', function ($scope, $rootScope, $timeout, brands
         }//end if
     });//end foreach 
 
-    const chunkSize = 4;
-    for (let i = 0; i < books_all.length; i += chunkSize) {
-        const chunk = books_all.slice(i, i + chunkSize);
-        books_group.push(chunk);
-    }//end for
-    //https://stackoverflow.com/questions/8495687/split-array-into-chunks  Thanks Google
-
+    var books_group = $rootScope.array_divider(books_all, 4, false);
     $scope.books_group = books_group.slice(0, book_cont);
     //console.log(books_group);
 
@@ -61,20 +53,11 @@ app.controller('controller_home', function ($scope, $rootScope, $timeout, brands
             //console.log("catch fuel");
         }//end trycatch fuel
 
-        console.log(data_fileters);
+        localStorage.setItem('filters', JSON.stringify(data_fileters));
+        $window.location.href = '#/shop';
     }//end callback_shop
 
-    $timeout(function () {
-        $('#slider').owlCarousel({
-            items: 3,
-            loop: true,
-            margin: 10,
-            nav: true,
-            autoplay: true,
-            autoplayTimeout: 4000,
-            smartSpeed: 800
-        });//end owlCarousel
-        $rootScope.loadOut();
-    }, 0);//end timeout
-    //Sin el timeout no carga el slider, pero con el timeaut aunque este a 0ms si que funciona.
+    $scope.myInterval = 4000;
+    $scope.noWrapSlides = false;
+    $rootScope.loadOut();
 });//end controller

@@ -15,7 +15,7 @@ class shop_dao
         return self::$_instance;
     }
 
-    public function list_cars($db, $offset, $limit)
+    /* public function list_cars($db, $offset, $limit)
     {
         $sql = "SELECT c.car_id, c.matricula, c.bastidor, m.model_name, b.brand_name, c.price, c.km, c.description, f.fuel_type_name, c.extres, c.f_mat, cat.category_name, c.lat, c.lon, c.city, c.view_count, (SELECT i.car_img_file FROM car_img i WHERE i.car_ref = c.car_id LIMIT 1) img FROM car c INNER JOIN models m ON m.model_id = c.model INNER JOIN brands b ON b.brand_id = m.model_brand INNER JOIN fuel_type f ON f.fuel_type_id = c.fuel_type INNER JOIN category cat ON cat.category_id = c.category LIMIT " . $offset . "," . $limit . ";";
         $ejecutar = $db->ejecutar($sql);
@@ -25,6 +25,20 @@ class shop_dao
     public function list_cars_filters($db, $offset, $limit, $filters)
     {
         $sql = "SELECT c.car_id, c.matricula, c.bastidor, m.model_name, b.brand_name, c.price, c.km, c.description, f.fuel_type_name, c.extres, c.f_mat, cat.category_name, c.lat, c.lon, c.city, c.view_count, (SELECT i.car_img_file FROM car_img i WHERE i.car_ref = c.car_id LIMIT 1) img FROM car c INNER JOIN models m ON m.model_id = c.model INNER JOIN brands b ON b.brand_id = m.model_brand INNER JOIN fuel_type f ON f.fuel_type_id = c.fuel_type INNER JOIN category cat ON cat.category_id = c.category " . $filters . " LIMIT " . $offset . "," . $limit . ";";
+        $ejecutar = $db->ejecutar($sql);
+        return $db->listar($ejecutar);
+    } //list_cars_filters */
+
+    public function list_cars($db, $offset, $limit)
+    {
+        $sql = "SELECT c.car_id, c.matricula, c.bastidor, m.model_name, b.brand_name, c.price, c.km, c.description, f.fuel_type_name, c.extres, c.f_mat, cat.category_name, c.lat, c.lon, c.city, c.view_count, (SELECT i.car_img_file FROM car_img i WHERE i.car_ref = c.car_id LIMIT 1) img FROM car c INNER JOIN models m ON m.model_id = c.model INNER JOIN brands b ON b.brand_id = m.model_brand INNER JOIN fuel_type f ON f.fuel_type_id = c.fuel_type INNER JOIN category cat ON cat.category_id = c.category;";
+        $ejecutar = $db->ejecutar($sql);
+        return $db->listar($ejecutar);
+    } //list_cars
+
+    public function list_cars_filters($db, $offset, $limit, $filters)
+    {
+        $sql = "SELECT c.car_id, c.matricula, c.bastidor, m.model_name, b.brand_name, c.price, c.km, c.description, f.fuel_type_name, c.extres, c.f_mat, cat.category_name, c.lat, c.lon, c.city, c.view_count, (SELECT i.car_img_file FROM car_img i WHERE i.car_ref = c.car_id LIMIT 1) img FROM car c INNER JOIN models m ON m.model_id = c.model INNER JOIN brands b ON b.brand_id = m.model_brand INNER JOIN fuel_type f ON f.fuel_type_id = c.fuel_type INNER JOIN category cat ON cat.category_id = c.category " . $filters . ";";
         $ejecutar = $db->ejecutar($sql);
         return $db->listar($ejecutar);
     } //list_cars_filters

@@ -1,5 +1,17 @@
 /************CIRCULITO DE CARGA**************/
 
+/* .fade {
+	transition: opacity .5s;
+}
+
+.fade.ng-enter, .fade.ng-leave-active {
+	opacity: 0;
+}
+
+.fade.ng-leave, .fade.ng-enter-active {
+	opacity: 1;
+} */
+
 #overlay {
 	position: fixed;
 	top: 0;
@@ -35,6 +47,7 @@
 .is-hide {
 	display: none;
 }
+
 /*
 
 <div id="overlay">

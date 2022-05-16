@@ -1,4 +1,4 @@
-var app = angular.module('Concessionaire-Framework_PHP_OO_MVC_AngularJS1.4.9', ['ngRoute', 'toastr']);
+var app = angular.module('Concessionaire-Framework_PHP_OO_MVC_AngularJS1.4.9', ['ngRoute', 'toastr', 'ui.bootstrap', 'ngAnimate']);
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
@@ -28,6 +28,10 @@ app.config(['$routeProvider', function ($routeProvider) {
                 }//end books
             }//resolves
         })//end home
+        .when("/shop", {
+            templateUrl: "frontend/module/shop/view/shop.html",
+            controller: "controller_shop",
+        })//end shop
         .otherwise("/home")//end default
 }]);//end config
 
@@ -49,4 +53,22 @@ app.run(function ($rootScope, $window) {
             $("#overlay").fadeOut(ms);
         }, timeout);
     }//end loadOut
+
+    $rootScope.array_divider = function (arr, chunckSize, include_rests = true) {
+        var arr_group = [];
+
+        if (include_rests) {
+            var chunckFor = Math.ceil(arr.length / chunckSize);
+        } else {
+            var chunckFor = Math.floor(arr.length / chunckSize);
+        }//end else if
+
+        for (let i = 0; i < chunckFor; i++) {
+            var offset = i * chunckSize;
+            var limit = offset + chunckSize;
+            arr_group.push(arr.slice(offset, limit));
+        }//end for
+        return arr_group;
+    }//end array_divider
+
 });//end run
