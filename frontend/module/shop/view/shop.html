@@ -1,6 +1,32 @@
-<p>TEST SHOP</p>
-
-<div id="shop_list"></div>
+<link rel="stylesheet" href="frontend/view/css/heart.css">
+<div class="content box-1 filters">
+    <form id="filter_form">
+        <span><label for="price" data-tr="price">Price</label>: </span>
+        <select ng-model="price" id="price" name="price">
+            <option value="null" ng-selected="price_selected == 'null'">----------</option>
+            <option value="maytomen" id="maytomen_price" data-tr="Highest to lowest" ng-selected="price_selected == 'maytomen'">Highest to lowest</option>
+            <option value="mentomay" id="mentomay_price" data-tr="Lowest to highest" ng-selected="price_selected == 'mentomay'">Lowest to highest</option>
+        </select>
+    </form>
+</div>
+<div id="shop_list">
+    <div class="block-1 box-1 content" ng-repeat="cars in cars_group" infinite-scroll="scroll_shop()"
+        infinite-scroll-distance="0.1">
+        <div class="div_hover" ng-repeat="car in cars" ng-class="{last: $last}">
+            <img ng-src="{{car.img}}" class="img">
+            <p class="text-1">{{car.title}} <strong> {{car.price}} €</strong></p>
+            <p class="upper"><b data-tr="category_name">category</b>: <span
+                    data-tr="{{car.category_name}}">{{car.category_name}}</span></p>
+            <p class="upper"><b data-tr="fuel_type_name">fuel</b>: <span
+                    data-tr="{{car.fuel_type_name}}">{{car.fuel_type_name}}</span></p>
+            <p class="upper"><b data-tr="km">km</b>: <span data-tr="{{car.km}}">{{car.km}}</span></p>
+            <p class="upper"><b data-tr="view_count">View count</b>: <span>{{car.view_count}}</span></p>
+            <p class="upper"><b data-tr="extres">extres</b>: <span>{{car.extres_formated}}</span></p>
+            <a href="#/shop/details/{{car.car_id}}" class="button" data-tr="See More">See More</a>
+            <div class="heart" ng-class="{'heart-active': car.like}" ng-click="car_like()"></div>
+        </div>
+    </div>
+</div>
 <div id="pagination"></div>
 
 <div id="overlay">

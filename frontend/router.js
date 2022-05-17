@@ -1,4 +1,4 @@
-var app = angular.module('Concessionaire-Framework_PHP_OO_MVC_AngularJS1.4.9', ['ngRoute', 'toastr', 'ui.bootstrap', 'ngAnimate']);
+var app = angular.module('Concessionaire-Framework_PHP_OO_MVC_AngularJS1.4.9', ['ngRoute', 'toastr', 'ui.bootstrap', 'ngAnimate', 'infinite-scroll']);
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
@@ -31,6 +31,21 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when("/shop", {
             templateUrl: "frontend/module/shop/view/shop.html",
             controller: "controller_shop",
+            //css: "frontend/view/css/heart.css",
+            resolve: {
+                brands: function (services) {
+                    return services.post('shop', 'list_brands');
+                },//end brands
+                categorys: function (services) {
+                    return services.post('shop', 'list_category');
+                },//end categorys
+                fuels: function (services) {
+                    return services.post('shop', 'list_fuels');
+                },//end fuels
+                citys: function (services) {
+                    return services.post('shop', 'list_city');
+                }//end citys
+            }//end reso9lve
         })//end shop
         .otherwise("/home")//end default
 }]);//end config
