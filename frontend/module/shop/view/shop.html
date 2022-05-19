@@ -2,7 +2,7 @@
 <div class="content box-1 filters">
     <form id="filter_form">
         <span><label for="price" data-tr="price">Price</label>: </span>
-        <select ng-model="price" id="price" name="price">
+        <select ng-model="f_price" id="price" name="price">
             <option value="null" ng-selected="filters.price == 'null'">----------</option>
             <option value="maytomen" id="maytomen_price" data-tr="Highest to lowest"
                 ng-selected="filters.price == 'maytomen'">Highest to lowest</option>
@@ -10,7 +10,7 @@
                 ng-selected="filters.price == 'mentomay'">Lowest to highest</option>
         </select>
         <span><label for="view_count" data-tr="view_count">View count</label>: </span>
-        <select ng-model="view_count" id="view_count" name="view_count">
+        <select ng-model="f_view_count" id="view_count" name="view_count">
             <option value="null" ng-selected="filters.view_count == 'null'">----------</option>
             <option value="maytomen" id="maytomen_price" data-tr="Highest to lowest"
                 ng-selected="filters.view_count == 'maytomen'">Highest to lowest</option>
@@ -19,16 +19,40 @@
         </select>
 
         <span><label for="brands" data-tr="brand_name">Brands</label>: </span>
-        <select ng-model="brands" id="brands" name="brands">
+        <select id="brands" name="brands">
             <option value="null" ng-selected="filters.brand == 'null'">----------</option>
             <option ng-repeat="brand in brands_shop" value="{{brand.brand_name}}" id="{{brand.brand_name}}"
-                ng-selected="filters.brand == 'brand.brand_name'">{{brand.brand_name}}</option>
+                ng-selected="filters.brand == brand.brand_name">{{brand.brand_name}}</option>
         </select>
+
+        <span><label for="category" data-tr="category_name">Category</label>: </span>
+        <select id="category" name="category">
+            <option value="null" ng-selected="filters.category == 'null'">----------</option>
+            <option ng-repeat="category in categorys_shop" value="{{category.category_name}}"
+                id="{{category.category_name}}" ng-selected="filters.category == category.category_name">
+                {{category.category_name}}</option>
+        </select>
+
+        <span><label for="fuel" data-tr="fuel_type_name">Fuel Type</label>: </span>
+        <select id="fuel" name="fuel">
+            <option value="null" ng-selected="filters.fuel == 'null'">----------</option>
+            <option ng-repeat="fuels in fuels_shop" value="{{fuels.fuel_type_name}}" id="{{fuels.fuel_type_name}}"
+                ng-selected="filters.fuel == fuels.fuel_type_name">{{fuels.fuel_type_name}}</option>
+        </select>
+
+        <span><label for="city" data-tr="city">City</label>: </span>
+        <select id="city" name="city">
+            <option value="null" ng-selected="filters.city == 'null'">----------</option>
+            <option ng-repeat="city in citys_shop" value="{{city.city}}" id="{{city.city}}"
+                ng-selected="filters.city == city.city">{{city.city}}</option>
+        </select>
+        <span class="btn-filter" data-tr="Send" ng-click="send_filters_shop()">Send</span>
+        <span class="btn-filter" data-tr="Reset" ng-click="reset_filters_shop()">Reset</span>
+
     </form>
 </div>
-<div id="shop_list">
-    <div class="block-1 box-1 content" ng-repeat="cars in cars_group" infinite-scroll="scroll_shop()"
-        infinite-scroll-distance="0.1">
+<div id="shop_list" infinite-scroll="scroll_shop()" infinite-scroll-distance="0.1">
+    <div class="block-1 box-1 content" ng-repeat="cars in cars_group">
         <div class="div_hover" ng-repeat="car in cars" ng-class="{last: $last}">
             <img ng-src="{{car.img}}" class="img">
             <p class="text-1">{{car.title}} <strong> {{car.price}} €</strong></p>

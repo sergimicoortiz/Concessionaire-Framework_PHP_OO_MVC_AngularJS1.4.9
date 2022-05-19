@@ -1,5 +1,5 @@
 app.factory('services_filters', ['services', '$rootScope', function (services, $rootScope) {
-    let services_filters = { reset_filters: reset_filters, get_filters: get_filters };
+    let services_filters = { reset_filters: reset_filters, get_filters: get_filters, set_filters: set_filters };
     return services_filters;
 
     function reset_filters() {
@@ -45,8 +45,13 @@ app.factory('services_filters', ['services', '$rootScope', function (services, $
         });//end foreach
 
         const filters = { price: f_price, brand: f_brand, category: f_category, fuel: f_fuel, city: f_city, view_count: f_view_count };
-        console.log(filters);
+        //console.log(filters);
         $rootScope.filters = filters;
     }//end get filters
+
+    function set_filters(form_data) {
+        const filters = [['c.price', form_data.price], ['b.brand_name', form_data.brands], ['cat.category_name', form_data.category], ['f.fuel_type_name', form_data.fuel], ['c.city', form_data.city], ['c.view_count', form_data.view_count]];
+        localStorage.setItem('filters', JSON.stringify(filters));
+    }//end set_filters
 
 }]);//end services_filters

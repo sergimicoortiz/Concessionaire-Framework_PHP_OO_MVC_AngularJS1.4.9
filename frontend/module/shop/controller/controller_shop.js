@@ -17,9 +17,16 @@ app.controller('controller_shop', function ($scope, $rootScope, $window, toastr,
         console.log(this.car.car_id);
     }//end car_like
 
-    console.log(categorys);
-    console.log(fuels);
-    console.log(citys);
+    $scope.send_filters_shop = function () {
+        var form_data = Object.fromEntries(new FormData(document.getElementById('filter_form')));
+        services_filters.set_filters(form_data);
+        $window.location.reload();
+    }//end send filters
+
+    $scope.reset_filters_shop = function () {
+        services_filters.reset_filters();
+        $window.location.reload();
+    }//end reset filters
 
     $rootScope.loadOut();
 });//end controller
