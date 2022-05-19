@@ -3,9 +3,26 @@
     <form id="filter_form">
         <span><label for="price" data-tr="price">Price</label>: </span>
         <select ng-model="price" id="price" name="price">
-            <option value="null" ng-selected="price_selected == 'null'">----------</option>
-            <option value="maytomen" id="maytomen_price" data-tr="Highest to lowest" ng-selected="price_selected == 'maytomen'">Highest to lowest</option>
-            <option value="mentomay" id="mentomay_price" data-tr="Lowest to highest" ng-selected="price_selected == 'mentomay'">Lowest to highest</option>
+            <option value="null" ng-selected="filters.price == 'null'">----------</option>
+            <option value="maytomen" id="maytomen_price" data-tr="Highest to lowest"
+                ng-selected="filters.price == 'maytomen'">Highest to lowest</option>
+            <option value="mentomay" id="mentomay_price" data-tr="Lowest to highest"
+                ng-selected="filters.price == 'mentomay'">Lowest to highest</option>
+        </select>
+        <span><label for="view_count" data-tr="view_count">View count</label>: </span>
+        <select ng-model="view_count" id="view_count" name="view_count">
+            <option value="null" ng-selected="filters.view_count == 'null'">----------</option>
+            <option value="maytomen" id="maytomen_price" data-tr="Highest to lowest"
+                ng-selected="filters.view_count == 'maytomen'">Highest to lowest</option>
+            <option value="mentomay" id="mentomay_price" data-tr="Lowest to highest"
+                ng-selected="filters.view_count == 'mentomay'">Lowest to highest</option>
+        </select>
+
+        <span><label for="brands" data-tr="brand_name">Brands</label>: </span>
+        <select ng-model="brands" id="brands" name="brands">
+            <option value="null" ng-selected="filters.brand == 'null'">----------</option>
+            <option ng-repeat="brand in brands_shop" value="{{brand.brand_name}}" id="{{brand.brand_name}}"
+                ng-selected="filters.brand == 'brand.brand_name'">{{brand.brand_name}}</option>
         </select>
     </form>
 </div>

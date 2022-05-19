@@ -1,8 +1,8 @@
 app.controller('controller_home', function ($scope, $rootScope, $window, brands, categorys, fuels, books) {
     $rootScope.loadIn();
-    $scope.brands = brands;
-    $scope.categorys = categorys;
-    $scope.fuels = fuels;
+    $scope.brands_home = brands;
+    $scope.categorys_home = categorys;
+    $scope.fuels_home = fuels;
 
     var books_all = [];
     var book_cont = 1;

@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <p class="titels" data-tr="brands">brands</p>
 
-<carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-    <slide ng-repeat="brand in brands" active="slide.active">
+<carousel interval="myInterval" no-wrap="noWrapSlides">
+    <slide ng-repeat="brand in brands_home">
         <img src="{{brand.brand_img}}" ng-click="callback_shop()" style="margin:auto;">
     </slide>
 </carousel>
@@ -10,7 +10,7 @@
 <section id="content">
     <p class="titels" data-tr="categorys">categorys</p>
     <div class="block-1 box-1" id="category">
-        <div ng-repeat="category in categorys" ng-class="{'last': $last}">
+        <div ng-repeat="category in categorys_home" ng-class="{'last': $last}">
             <img src="{{category.category_img}}">
             <p class="text-1" data-tr="{{category.category_name}}">{{category.category_name}}</p>
             <a class="button" data-tr="See More" ng-click="callback_shop()">See More</a>
@@ -18,7 +18,7 @@
     </div>
     <p class="titels" data-tr="fuels">fuels</p>
     <div class="block-1 box_fuel" id="fuel_type">
-        <div ng-repeat="fuel in fuels" ng-class="{'last': $last}">
+        <div ng-repeat="fuel in fuels_home" ng-class="{'last': $last}">
             <img src="{{fuel.fuel_type_img}}">
             <p class="text-1" data-tr="{{fuel.fuel_type_name}}">{{fuel.fuel_type_name}}</p>
             <a class="button" data-tr="See More" ng-click="callback_shop()">See More</a>
@@ -42,7 +42,7 @@
             <a href="{{book.link}}" class="button" data-tr="See More">See More</a>
         </div>
     </div>
-    <span id="btn_more_books"><a data-tr="See More" class="button" ng-click="more_books()">See More</a></span>
+    <span id="see_more_books"><a data-tr="See More" class="button" ng-click="more_books()">See More</a></span>
 </section>
 
 <div id="overlay">

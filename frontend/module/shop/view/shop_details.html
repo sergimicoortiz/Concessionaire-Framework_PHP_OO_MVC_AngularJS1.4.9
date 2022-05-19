@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<div id="shop_list" class="">
+    <div id="details" class="details">
+        <div class="details"></div>
+        <carousel interval="myInterval" no-wrap="noWrapSlides">
+            <slide ng-repeat="img in car_details_img">
+                <img src="{{img}}" ng-click="callback_shop()" style="margin:auto;">
+            </slide>
+        </carousel>
+        <div id="detail_content">
+            <!-- <div class="heart" id="heart_1850"></div> -->
+            <p><span data-tr="brand_name">brand</span>: <span class="text-detail">{{car_details.brand_name}}</span></p>
+            <p><span data-tr="model_name">model</span>: <span class="text-detail">{{car_details.model_name}}</span></p>
+            <p><span data-tr="price">price</span>: <span class="text-detail">{{car_details.price}} €</span></p>
+            <p><span data-tr="km">km</span>: <span class="text-detail">{{car_details.km}}</span></p>
+            <p><span data-tr="category_name">category</span>: <span class="text-detail"
+                    data-tr="{{car_details.category_name}}">{{car_details.category_name}}</span></p>
+            <p><span data-tr="fuel_type_name">fuel</span>: <span class="text-detail"
+                    data-tr="{{car_details.fuel_type_name}}">{{car_details.fuel_type_name}}</span></p>
+            <p><span data-tr="extres">extres</span>: <span class="text-detail">{{car_details.extres_formated}}</span>
+            </p>
+            <p><span data-tr="description">description</span>:<br> <textarea cols="70" rows="13"
+                    disabled="">{{car_details.description}}</textarea>
+            </p>
+        </div>
+        <span ng-click="close_details()"><i class="fa-solid fa-x fa-3x" id="close_btn"></i></span>
+
+    </div>
+
+    <!--  <div id="related_cars">
+        <p class="titels" data-tr="related_cars">Related cars</p>
+        <div id="box_0" class="block-1 box-1">
+            <div id="main_1818" class="div_hover"><img
+                    src="http://localhost/Concessionaire-Framework_PHP_OO_MVC_JQuery/view/img/placeholder_cars_1.png"
+                    class="img">
+                <p class="text-1">opel: CORSA<strong>754866€</strong></p>
+                <p class="upper"><b data-tr="category_name">category</b>: <span data-tr="Km 0">Km 0</span></p>
+                <p class="upper"><b data-tr="fuel_type_name">fuel</b>: <span data-tr="Gasoil">Gasoil</span></p>
+                <p class="upper"><b data-tr="km">km</b>: 20137</p>
+                <p class="upper"><b data-tr="view_count">View count</b>: 78</p>
+                <p class="upper"><b data-tr="extres">extres</b>: GPS and Fronatal camera</p><a href="#" class="button"
+                    id="1818" data-tr="See More">See More</a>
+                <div class="heart" id="heart_1818"></div>
+            </div>
+            <div id="main_1859" class="div_hover"><img
+                    src="http://localhost/Concessionaire-Framework_PHP_OO_MVC_JQuery/view/img/placeholder_cars_1.png"
+                    class="img">
+                <p class="text-1">opel: CAMPO<strong>436873€</strong></p>
+                <p class="upper"><b data-tr="category_name">category</b>: <span data-tr="Adapted">Adapted</span></p>
+                <p class="upper"><b data-tr="fuel_type_name">fuel</b>: <span data-tr="Gasoline">Gasoline</span></p>
+                <p class="upper"><b data-tr="km">km</b>: 152181</p>
+                <p class="upper"><b data-tr="view_count">View count</b>: 60</p>
+                <p class="upper"><b data-tr="extres">extres</b>: GPS and Fronatal camera</p><a href="#" class="button"
+                    id="1859" data-tr="See More">See More</a>
+                <div class="heart" id="heart_1859"></div>
+            </div>
+        </div>
+    </div>
+    <div id="see_more_cars"><span data-tr="See More" class="btn-see_more">See More</span></div> -->
+</div>
