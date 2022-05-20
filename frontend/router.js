@@ -53,7 +53,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         .otherwise("/home")//end default
 }]);//end config
 
-app.run(function ($rootScope, $window) {
+app.run(function ($rootScope, $window, services_search) {
 
     $rootScope.error_callback = function (error_msg, error_type = "503") {
         var callback = "#/error/" + error_type + "/" + error_msg;
@@ -88,5 +88,38 @@ app.run(function ($rootScope, $window) {
         }//end for
         return arr_group;
     }//end array_divider
+
+    services_search.get_category();
+
+    $rootScope.search_change_category = function () {
+        services_search.get_brands();
+        $rootScope.brand_search = null;
+        $rootScope.city_search = null;
+    }//end search_change_category
+
+    $rootScope.search_change_city = function () {
+        services_search.get_citys();
+    }//end search_change_city
+
+    $rootScope.search_change_brand = function () {
+        $rootScope.city_search = null;
+    }//end search_change_brand
+
+    $rootScope.select_city = function () {
+        $rootScope.city_search = this.city.city;
+    }//end select_city
+
+    $rootScope.search_btn = function () {
+        services_search.filters_search();
+        if ($window.location.hash.split('/')[1] == 'shop') {
+            $window.location.reload();
+        } else {
+            $window.location.href = '#/shop';
+            $rootScope.brand_search = null;
+            $rootScope.city_search = null;
+            $rootScope.category_search = null;
+        }//end else if
+
+    }//end select_city
 
 });//end run

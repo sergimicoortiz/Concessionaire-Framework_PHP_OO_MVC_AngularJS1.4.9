@@ -17,13 +17,31 @@
                             <option id="button-es">🇪🇸Español</option>
                             <option id="button-val">Valencià</option>
                         </select></li> -->
-                    <!-- <li><select name="category_search" id="category_search"></select></li>
-                    <li><select name="brand_search" id="brand_search"></select></li>
+                    <li><select name="category_search" id="category_search" ng-model="$root.category_search"
+                            ng-change="search_change_category()">
+                            <option disabled selected value=""><span data-tr="category_name">Category</span><span>:
+                                </span>
+                            </option>
+                            <option ng-repeat=" category in categorys_search" value="{{category.category_name}}">
+                                {{category.category_name}}</option>
+                        </select></li>
+                    <li><select name="brand_search" id="brand_search" ng-model="$root.brand_search"
+                            ng-change="search_change_brand()">
+                            <option disabled selected value=""><span data-tr="brand_name">Brand</span><span>: </span>
+                            </option>
+                            <option ng-repeat=" brand in brands_search" value="{{brand.brand_name}}">
+                                {{brand.brand_name}}</option>
+                        </select></li>
                     <li>
-                        <input type="text" name="city_search" id="city_search" placeholder="City" autocomplete="off">
-                        <div id="autocomplete"></div>
+                        <input type="text" name="city_search" id="city_search" placeholder="City" autocomplete="off"
+                            ng-model="$root.city_search" ng-change="search_change_city()">
+                        <div id="autocomplete" ng-model="$root.autocomplete">
+                            <span class="search-item" ng-repeat="city in citys_search"
+                                ng-click="select_city()">{{city.city}}</span>
+                        </div>
                     </li>
-                    <li><i class="fa-solid fa-magnifying-glass fa-3x" id="search_button"></i></li> -->
+                    <li ng-click="search_btn()"><i class="fa-solid fa-magnifying-glass fa-3x" id="search_button"></i>
+                    </li>
                     <!--  <li><div id="user_info"></div></li> -->
                 </ul>
                 <div class="clear"></div>

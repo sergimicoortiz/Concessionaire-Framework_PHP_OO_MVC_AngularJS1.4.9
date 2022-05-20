@@ -52,6 +52,7 @@
     </form>
 </div>
 <div id="shop_list" infinite-scroll="scroll_shop()" infinite-scroll-distance="0.1">
+    <span class="noresult" data-tr="NO RESULTS" ng-if="cars_group.length == 0">NO RESULTS</span>
     <div class="block-1 box-1 content" ng-repeat="cars in cars_group">
         <div class="div_hover" ng-repeat="car in cars" ng-class="{last: $last}">
             <img ng-src="{{car.img}}" class="img">
