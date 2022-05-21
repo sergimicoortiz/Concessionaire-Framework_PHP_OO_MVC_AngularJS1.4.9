@@ -1,0 +1,9 @@
+Dockerfile
+.dockerignore
+docker-compose.yml
+.gitignore
+.git
+README.md
+DB
+template
+old_files

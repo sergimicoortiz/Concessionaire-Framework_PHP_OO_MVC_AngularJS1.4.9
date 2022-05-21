@@ -9,7 +9,13 @@ class confdb
 
     private function __construct()
     {
-        $cnfg = parse_ini_file(MODEL_PATH . "db.ini");
+
+        if (gethostname() == 'docker_web') {
+            $cnfg = parse_ini_file(MODEL_PATH . "db_docker.ini");
+        } else {
+            $cnfg = parse_ini_file(MODEL_PATH . "db.ini");
+        } //end else if
+
         $this->_userdb = $cnfg['user'];
         $this->_passdb = $cnfg['pass'];
         $this->_hostdb = $cnfg['host'];

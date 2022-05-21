@@ -95,6 +95,7 @@ app.run(function ($rootScope, $window, services_search) {
         services_search.get_brands();
         $rootScope.brand_search = null;
         $rootScope.city_search = null;
+        $rootScope.citys_search = null;
     }//end search_change_category
 
     $rootScope.search_change_city = function () {
@@ -103,10 +104,12 @@ app.run(function ($rootScope, $window, services_search) {
 
     $rootScope.search_change_brand = function () {
         $rootScope.city_search = null;
+        $rootScope.citys_search = null;
     }//end search_change_brand
 
     $rootScope.select_city = function () {
         $rootScope.city_search = this.city.city;
+        $rootScope.citys_search = null;
     }//end select_city
 
     $rootScope.search_btn = function () {
