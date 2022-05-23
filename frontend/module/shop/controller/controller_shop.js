@@ -1,4 +1,4 @@
-app.controller('controller_shop', function ($scope, $rootScope, $window, toastr, services_shop, services_filters, brands, categorys, fuels, citys) {
+app.controller('controller_shop', function ($scope, $rootScope, $window, toastr, services_shop, services_filters, services_map, brands, categorys, fuels, citys) {
     $rootScope.loadIn();
     services_shop.load_cars();
     services_filters.get_filters();
@@ -9,8 +9,7 @@ app.controller('controller_shop', function ($scope, $rootScope, $window, toastr,
 
     $scope.scroll_shop = function () {
         $rootScope.car_page++;
-        var limit = $rootScope.car_page * 1;
-        $rootScope.cars_group = $rootScope.cars_root.slice(0, limit);
+        $rootScope.cars_group = $rootScope.cars_root.slice(0, $rootScope.car_page * 1);
     }//end scroll_shop
 
     $scope.car_like_shop = function () {
@@ -28,5 +27,6 @@ app.controller('controller_shop', function ($scope, $rootScope, $window, toastr,
         $window.location.reload();
     }//end reset filters
 
+    services_map.add_map();
     $rootScope.loadOut();
 });//end controller

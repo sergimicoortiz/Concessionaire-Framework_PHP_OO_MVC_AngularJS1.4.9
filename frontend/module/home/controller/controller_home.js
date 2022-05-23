@@ -28,7 +28,7 @@ app.controller('controller_home', function ($scope, $rootScope, $window, brands,
         book_cont++;
         if (book_cont = books_group.length) {
             //console.log('No more books');
-            document.querySelector('#btn_more_books').remove();
+            document.querySelector('#see_more_books').remove();
         }//end if
         $scope.books_group = books_group.slice(0, book_cont);
     }//end more books

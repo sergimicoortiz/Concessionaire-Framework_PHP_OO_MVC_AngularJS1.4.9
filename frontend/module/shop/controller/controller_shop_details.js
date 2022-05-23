@@ -1,4 +1,4 @@
-app.controller('controller_shop_details', function ($scope, $rootScope, $routeParams, $window, services_shop) {
+app.controller('controller_shop_details', function ($scope, $rootScope, $routeParams, $window, services_shop, services_map) {
     $rootScope.loadIn();
     services_shop.get_car_details($routeParams.car_id);
     $scope.myInterval = 4000;
@@ -21,6 +21,5 @@ app.controller('controller_shop_details', function ($scope, $rootScope, $routePa
         $rootScope.cars_related_group = $rootScope.cars_related_all.slice(0, $rootScope.related_cont * 1);
 
     }//end scroll_related
-
     $rootScope.loadOut();
 });//end controller

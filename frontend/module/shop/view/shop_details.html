@@ -25,9 +25,10 @@
             </p>
         </div>
         <span ng-click="close_details()"><i class="fa-solid fa-x fa-3x" id="close_btn"></i></span>
-
     </div>
     <div id="related_cars">
+    <div id="map" style="width: 100px; height: 500px; padding-left: 20%; margin-left: 20%; margin-top: 2%;"></div>
+
         <p class="titels" data-tr="related_cars">Related cars</p>
         <div id="box_0" class="block-1 box-1" ng-repeat="cars_related in cars_related_group"
             infinite-scroll="scroll_related()" infinite-scroll-distance="0.001">

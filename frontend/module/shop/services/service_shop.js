@@ -1,4 +1,4 @@
-app.factory('services_shop', ['services', '$rootScope', '$window', function (services, $rootScope, $window) {
+app.factory('services_shop', ['services', '$rootScope', '$window', 'services_map', function (services, $rootScope, $window, services_map) {
     let service_shop = { load_cars: load_cars, get_car_details: get_car_details, like: like };
     return service_shop;
 
@@ -6,6 +6,12 @@ app.factory('services_shop', ['services', '$rootScope', '$window', function (ser
         car['like'] = false;
         return car;
     }//end  car_has_like
+
+    function add_car_map(car_list) {
+        car_list.forEach(car => {
+            services_map.add_pointer(car, car.img);
+        });//end foreach
+    }//end add_car_map
 
     function car_tractament(car_list, car_id = null, size = 4) {
         var lang_formater = "";
@@ -45,6 +51,7 @@ app.factory('services_shop', ['services', '$rootScope', '$window', function (ser
         if (use_filters) {
             services.post('shop', 'list_cars_filters', { "f_data": JSON.parse(localStorage.getItem('filters')) })
                 .then(function (response) {
+                    add_car_map(response);
                     $rootScope.cars_root = car_tractament(response);
                     $rootScope.cars_group = $rootScope.cars_root.slice(0, $rootScope.car_page * 1);
                 },
@@ -54,6 +61,7 @@ app.factory('services_shop', ['services', '$rootScope', '$window', function (ser
         } else {
             services.post('shop', 'list_cars')
                 .then(function (response) {
+                    add_car_map(response);
                     $rootScope.cars_root = car_tractament(response);
                     $rootScope.cars_group = $rootScope.cars_root.slice(0, $rootScope.car_page * 1);
                 },
@@ -85,6 +93,9 @@ app.factory('services_shop', ['services', '$rootScope', '$window', function (ser
                     car_tmp['extres_formated'] = extres;
                     car_tmp = car_has_like(car_tmp);
                     get_cars_related(car_tmp);
+                    services_map.add_map([car_tmp.lon, car_tmp.lat], 8)
+                    services_map.add_pointer(car_tmp, img_tmp[0]);
+                    //console.log(car_tmp);
                     $rootScope.car_details = car_tmp;
                     $rootScope.car_details_img = img_tmp;
                 }//end else if
