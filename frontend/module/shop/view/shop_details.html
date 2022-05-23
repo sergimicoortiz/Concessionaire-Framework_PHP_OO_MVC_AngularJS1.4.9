@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="frontend/view/css/heart.css">
 <div id="shop_list" class="">
     <div id="details" class="details">
         <div class="details"></div>
@@ -8,7 +9,7 @@
             </slide>
         </carousel>
         <div id="detail_content">
-            <!-- <div class="heart" id="heart_1850"></div> -->
+            <div class="heart" ng-class="{'heart-active': car_details.like}" ng-click="car_like_details()"></div>
             <p><span data-tr="brand_name">brand</span>: <span class="text-detail">{{car_details.brand_name}}</span></p>
             <p><span data-tr="model_name">model</span>: <span class="text-detail">{{car_details.model_name}}</span></p>
             <p><span data-tr="price">price</span>: <span class="text-detail">{{car_details.price}} €</span></p>
@@ -26,35 +27,23 @@
         <span ng-click="close_details()"><i class="fa-solid fa-x fa-3x" id="close_btn"></i></span>
 
     </div>
-
-    <!--  <div id="related_cars">
+    <div id="related_cars">
         <p class="titels" data-tr="related_cars">Related cars</p>
-        <div id="box_0" class="block-1 box-1">
-            <div id="main_1818" class="div_hover"><img
-                    src="http://localhost/Concessionaire-Framework_PHP_OO_MVC_JQuery/view/img/placeholder_cars_1.png"
-                    class="img">
-                <p class="text-1">opel: CORSA<strong>754866€</strong></p>
-                <p class="upper"><b data-tr="category_name">category</b>: <span data-tr="Km 0">Km 0</span></p>
-                <p class="upper"><b data-tr="fuel_type_name">fuel</b>: <span data-tr="Gasoil">Gasoil</span></p>
-                <p class="upper"><b data-tr="km">km</b>: 20137</p>
-                <p class="upper"><b data-tr="view_count">View count</b>: 78</p>
-                <p class="upper"><b data-tr="extres">extres</b>: GPS and Fronatal camera</p><a href="#" class="button"
-                    id="1818" data-tr="See More">See More</a>
-                <div class="heart" id="heart_1818"></div>
-            </div>
-            <div id="main_1859" class="div_hover"><img
-                    src="http://localhost/Concessionaire-Framework_PHP_OO_MVC_JQuery/view/img/placeholder_cars_1.png"
-                    class="img">
-                <p class="text-1">opel: CAMPO<strong>436873€</strong></p>
-                <p class="upper"><b data-tr="category_name">category</b>: <span data-tr="Adapted">Adapted</span></p>
-                <p class="upper"><b data-tr="fuel_type_name">fuel</b>: <span data-tr="Gasoline">Gasoline</span></p>
-                <p class="upper"><b data-tr="km">km</b>: 152181</p>
-                <p class="upper"><b data-tr="view_count">View count</b>: 60</p>
-                <p class="upper"><b data-tr="extres">extres</b>: GPS and Fronatal camera</p><a href="#" class="button"
-                    id="1859" data-tr="See More">See More</a>
-                <div class="heart" id="heart_1859"></div>
+        <div id="box_0" class="block-1 box-1" ng-repeat="cars_related in cars_related_group"
+            infinite-scroll="scroll_related()" infinite-scroll-distance="0.001">
+            <div class="div_hover" ng-repeat="car_related in cars_related">
+                <img src="{{car_related.img}}" class="img">
+                <p class="text-1">{{car_related.title}}<strong>{{car_related.price}}€</strong></p>
+                <p class="upper"><b data-tr="category_name">category</b>: <span
+                        data-tr="{{car_related.category_name}}">{{car_related.category_name}}</span></p>
+                <p class="upper"><b data-tr="fuel_type_name">fuel</b>: <span
+                        data-tr="{{car_related.fuel_type_name}}">{{car_related.fuel_type_name}}</span></p>
+                <p class="upper"><b data-tr="km">km</b>: {{car_related.km}}</p>
+                <p class="upper"><b data-tr="view_count">View count</b>: {{car_related.view_count}}</p>
+                <p class="upper"><b data-tr="extres">extres</b>: {{car_related.extres_formated}}</p><a
+                    href="#/shop/details/{{car_related.car_id}}" class="button" data-tr="See More">See More</a>
+                <div class="heart" ng-class="{'heart-active': car_related.like}" ng-click="car_like_related()"></div>
             </div>
         </div>
     </div>
-    <div id="see_more_cars"><span data-tr="See More" class="btn-see_more">See More</span></div> -->
 </div>

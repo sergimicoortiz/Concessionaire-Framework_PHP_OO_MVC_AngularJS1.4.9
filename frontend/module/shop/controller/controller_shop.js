@@ -13,8 +13,8 @@ app.controller('controller_shop', function ($scope, $rootScope, $window, toastr,
         $rootScope.cars_group = $rootScope.cars_root.slice(0, limit);
     }//end scroll_shop
 
-    $scope.car_like = function () {
-        console.log(this.car.car_id);
+    $scope.car_like_shop = function () {
+        services_shop.like(this.car.car_id);
     }//end car_like
 
     $scope.send_filters_shop = function () {

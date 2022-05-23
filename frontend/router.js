@@ -114,7 +114,7 @@ app.run(function ($rootScope, $window, services_search) {
 
     $rootScope.search_btn = function () {
         services_search.filters_search();
-        if ($window.location.hash.split('/')[1] == 'shop') {
+        if ($window.location.hash.split('/')[1] == 'shop' && $window.location.hash.split('/')[2] != 'details') {
             $window.location.reload();
         } else {
             $window.location.href = '#/shop';

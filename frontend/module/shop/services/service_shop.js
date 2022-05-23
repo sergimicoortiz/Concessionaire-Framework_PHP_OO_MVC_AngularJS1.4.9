@@ -1,8 +1,13 @@
-app.factory('services_shop', ['services', '$rootScope', function (services, $rootScope) {
-    let service_shop = { load_cars: load_cars, get_car_details: get_car_details };
+app.factory('services_shop', ['services', '$rootScope', '$window', function (services, $rootScope, $window) {
+    let service_shop = { load_cars: load_cars, get_car_details: get_car_details, like: like };
     return service_shop;
 
-    function car_tractament(car_list, size = 4) {
+    function car_has_like(car) {
+        car['like'] = false;
+        return car;
+    }//end  car_has_like
+
+    function car_tractament(car_list, car_id = null, size = 4) {
         var lang_formater = "";
         if (localStorage.getItem('app-lang') == 'es') {
             lang_formater = 'es-ES';
@@ -13,12 +18,14 @@ app.factory('services_shop', ['services', '$rootScope', function (services, $roo
 
         var car_tmp = [];
         car_list.forEach(car => {
-            var title = car['brand_name'] + ': ' + car['model_name'];
-            car['title'] = title.toUpperCase();
-            var extres = formatter_extres.format(car['extres'].split(':').slice(0, -1));
-            car['extres_formated'] = extres;
-            car['like'] = false;
-            car_tmp.push(car);
+            if (car.car_id != car_id || car_id == null) {
+                var title = car['brand_name'] + ': ' + car['model_name'];
+                car['title'] = title.toUpperCase();
+                var extres = formatter_extres.format(car['extres'].split(':').slice(0, -1));
+                car['extres_formated'] = extres;
+                car = car_has_like(car);
+                car_tmp.push(car);
+            }//end if
         });
         return $rootScope.array_divider(car_tmp, size);
     }//end car_tractament
@@ -38,9 +45,8 @@ app.factory('services_shop', ['services', '$rootScope', function (services, $roo
         if (use_filters) {
             services.post('shop', 'list_cars_filters', { "f_data": JSON.parse(localStorage.getItem('filters')) })
                 .then(function (response) {
-                    var limit = $rootScope.car_page * 1;
                     $rootScope.cars_root = car_tractament(response);
-                    $rootScope.cars_group = $rootScope.cars_root.slice(0, limit);
+                    $rootScope.cars_group = $rootScope.cars_root.slice(0, $rootScope.car_page * 1);
                 },
                     function (error) {
                         $rootScope.error_callback("post_shop_cars_filters_error");
@@ -48,9 +54,8 @@ app.factory('services_shop', ['services', '$rootScope', function (services, $roo
         } else {
             services.post('shop', 'list_cars')
                 .then(function (response) {
-                    var limit = $rootScope.car_page * 1;
                     $rootScope.cars_root = car_tractament(response);
-                    $rootScope.cars_group = $rootScope.cars_root.slice(0, limit);
+                    $rootScope.cars_group = $rootScope.cars_root.slice(0, $rootScope.car_page * 1);
                 },
                     function (error) {
                         $rootScope.error_callback("post_shop_cars_all_error");
@@ -78,6 +83,8 @@ app.factory('services_shop', ['services', '$rootScope', function (services, $roo
                     var car_tmp = response.car[0];
                     var extres = formatter_extres.format(car_tmp['extres'].split(':').slice(0, -1));
                     car_tmp['extres_formated'] = extres;
+                    car_tmp = car_has_like(car_tmp);
+                    get_cars_related(car_tmp);
                     $rootScope.car_details = car_tmp;
                     $rootScope.car_details_img = img_tmp;
                 }//end else if
@@ -86,5 +93,26 @@ app.factory('services_shop', ['services', '$rootScope', function (services, $roo
                     $rootScope.error_callback("post_shop_cars_detail_error");
                 })//end post
     }//end get_car_details
+
+    function get_cars_related(car) {
+        const filters_related = [['b.brand_name', car.brand_name]];
+        services.post('shop', 'list_cars_filters', { "f_data": filters_related })
+            .then(function (response) {
+                //console.log(response);
+                $rootScope.related_cont = 1;
+                $rootScope.cars_related_all = car_tractament(response, car.car_id);
+                $rootScope.cars_related_group = $rootScope.cars_related_all.slice(0, $rootScope.related_cont * 1);
+
+            },
+                function (error) {
+                    $rootScope.error_callback("post_shop_cars_related_error");
+                })//end post
+    }//end get_cars_related
+
+    function like(car_id) {
+        var callback = $window.location.hash;
+        console.log(callback);
+        console.log(car_id);
+    }//end like
 
 }]);//end services_shop
