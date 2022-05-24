@@ -9,7 +9,7 @@ app.factory('services_shop', ['services', '$rootScope', '$window', 'services_map
 
     function add_car_map(car_list) {
         car_list.forEach(car => {
-            services_map.add_pointer(car, car.img);
+            services_map.add_pointer(car, car.img, false);
         });//end foreach
     }//end add_car_map
 

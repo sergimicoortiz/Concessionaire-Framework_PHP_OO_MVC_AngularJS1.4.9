@@ -50,10 +50,18 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: "frontend/module/shop/view/shop_details.html",
             controller: "controller_shop_details"
         })//end shop details
+        .when("/register", {
+            templateUrl: "frontend/module/login/view/register.html",
+            controller: "controller_register"
+        })//end shop register
+        .when("/login", {
+            templateUrl: "frontend/module/login/view/login.html",
+            controller: "controller_login"
+        })//end shop register
         .otherwise("/home")//end default
 }]);//end config
 
-app.run(function ($rootScope, $window, services_search) {
+app.run(function ($rootScope, $window, services_search, services_login) {
 
     $rootScope.error_callback = function (error_msg, error_type = "503") {
         var callback = "#/error/" + error_type + "/" + error_msg;
@@ -89,6 +97,7 @@ app.run(function ($rootScope, $window, services_search) {
         return arr_group;
     }//end array_divider
 
+    services_login.load_menu();
     services_search.get_category();
 
     $rootScope.search_change_category = function () {

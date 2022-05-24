@@ -42,7 +42,8 @@
                     </li>
                     <li ng-click="search_btn()"><i class="fa-solid fa-magnifying-glass fa-3x" id="search_button"></i>
                     </li>
-                    <!--  <li><div id="user_info"></div></li> -->
+                    <li ng-if="menutype == 'default'"><a href="#/login" data-tr="login">Login</a></li>
+                    <li ng-if="menutype == 'user'"><span>u</span></li>
                 </ul>
                 <div class="clear"></div>
             </nav>

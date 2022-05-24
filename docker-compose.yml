@@ -1,20 +1,22 @@
 version: "3.3"
 services:
   sql:
-      image: mysql:latest
-      volumes:
+    image: mysql:latest
+    restart: always
+    volumes:
       - ./DB/db.sql:/docker-entrypoint-initdb.d/db.sql
-      hostname: docker_sql
-      environment:
-        MYSQL_ROOT_PASSWORD: This_is_a_password_that_i_will_not_use
-        MYSQL_USER: admin
-        MYSQL_PASSWORD: admin
-        MYSQL_DATABASE: concessionaire
+    hostname: docker_sql
+    environment:
+      MYSQL_ROOT_PASSWORD: This_is_a_password_that_i_will_not_use
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: concessionaire
 
   web:
     build: .
+    restart: always
     hostname: docker_web
     ports:
-    - 8080:80
+      - 8080:80
     depends_on:
-    - sql
+      - sql
