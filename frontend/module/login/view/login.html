@@ -1,9 +1,13 @@
-<form id="form_login" method="post" class="form">
-    <fieldset><label for="username"><input type="text" placeholder="Usernme" name="username" id="username"></label>
-        <label for="password"><input type="password" placeholder="Password" name="password" id="password"></label>
-        <span id="login_errors" class="errors"></span><br>
-        <span class="button" id="send_btn">Send</span>
-        <br><span class="login_msg">You don't have an account, registere <a href="#/register">HERE</a></span>
+<form id="form_login" method="post" class="form" name="form_login">
+    <fieldset><label for="username"><input type="text" placeholder="Usernme" name="username" id="username"
+                required></label>
+        <label for="password"><input type="password" placeholder="Password" name="password" id="password"
+                required></label>
+        <span class="errors" ng-show="login_error == 1">*The
+            username and the password can't be empty.</span>
+        <span class="errors" ng-show="login_error == 2">*The username or the password are incorrect.</span><br>
+        <button class="button" id="send_btn" ng-click="btn_login()">Send</button>
+        <br><span class="login_msg">if you don't have an account, registere <a href="#/register">HERE</a></span>
     </fieldset>
     <!-- <span class="login_msg">If you don't remember your password, click <a id="btn-recover" href="#">HERE</a></span>
     <br><button id="social-google">Google</button>

@@ -6,7 +6,7 @@ define('PROJECT', '/Concessionaire-Framework_PHP_OO_MVC_AngularJS1.4.9/backend/'
 define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'] . PROJECT);
 
 //SITE_PATH
-define('SITE_PATH', 'http://' . $_SERVER['HTTP_HOST'] . PROJECT);
+define('SITE_PATH', 'http://' . $_SERVER['HTTP_HOST'] . "\/Concessionaire-Framework_PHP_OO_MVC_AngularJS1.4.9\/");
 
 //PRODUCTION
 define('PRODUCTION', true);

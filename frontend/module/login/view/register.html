@@ -1,25 +1,36 @@
-<form id="form_register" class="form">
+<form id="form_register" class="form" ng-model="form_register" name="form_register">
     <fieldset>
 
         <label for="username"><input type="text" placeholder="Usernme" name="username" id="username"
                 ng-pattern="user_regex" ng-model="user_register" ng-minlength="3" ng-maxlength="20" required>
-            <span class="errors" ng-if="user_error == 1">*You have to introduce an username</span>
-            <span class="errors" ng-if="user_error == 2">*The username's format is incorrect</span>
+            <span class="errors" ng-show="form_register.username.$error.required && form_register.username.$dirty">*You
+                have to introduce an
+                username</span><br>
+            <span class="errors"
+                ng-show="form_register.username.$invalid && !form_register.username.$error.required ">*The username's
+                format is incorrect</span>
         </label>
 
         <label for="password">
             <input type="password" placeholder="Password" name="password" id="password" ng-model="password_register"
                 ng-minlength="8" required>
-            <span class="errors" ng-if="pass_error == 1">*The password need a minimum of 8 characters</span>
+            <span class="errors" ng-show="form_register.password.$invalid && form_register.password.$dirty">*The
+                password need a minimum of 8
+                characters</span>
         </label>
 
         <label for="email">
             <input type="text" placeholder="Email" name="email" id="email" ng-pattern="email_regex"
-                ng-model="email_register" ng-minlength="3" ng-maxlength="20" required>
-            <span class="errors" ng-if="email_error == 1">*You have to introduce an email</span>
-            <span class="errors" ng-if="email_error == 2">*The email's format is incorrect</span>
+                ng-model="email_register" ng-minlength="3" required>
+            <span class="errors" ng-show="form_register.email.$error.required && form_register.email.$dirty">*You have
+                to introduce an email</span>
+            <span class="errors" ng-show="form_register.email.$invalid && !form_register.email.$error.required">*The
+                email's format is incorrect</span>
+            <span ng-show="invalid_user_register" class="errors">* The username or the email are already in use.</span>
         </label>
 
-        <button class="button" id="send_btn" ng-disabled="false" ng-click="btn_register()">Send</button>
+        <button class="button" id="send_btn"
+            ng-disabled="form_register.username.$error.required || form_register.username.$invalid || form_register.password.$invalid || form_register.email.$error.required || form_register.email.$invalid"
+            ng-click="btn_register()">Send</button>
     </fieldset>
 </form>

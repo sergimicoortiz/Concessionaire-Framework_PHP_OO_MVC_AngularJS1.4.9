@@ -53,11 +53,23 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when("/register", {
             templateUrl: "frontend/module/login/view/register.html",
             controller: "controller_register"
-        })//end shop register
+        })//end register
         .when("/login", {
             templateUrl: "frontend/module/login/view/login.html",
             controller: "controller_login"
-        })//end shop register
+        })//end login
+        .when("/verify/:token", {
+            templateUrl: "frontend/module/login/view/verify.html",
+            controller: "controller_verify"
+        })//end verify
+        .when("/recover/", {
+            templateUrl: "frontend/module/login/view/recover.html",
+            controller: "controller_recover"
+        })//end recover
+        .when("/recover/:token", {
+            templateUrl: "frontend/module/login/view/recover.html",
+            controller: "controller_recover"
+        })//end recover
         .otherwise("/home")//end default
 }]);//end config
 
@@ -96,6 +108,10 @@ app.run(function ($rootScope, $window, services_search, services_login) {
         }//end for
         return arr_group;
     }//end array_divider
+
+    $rootScope.logout = function () {
+        services_login.logout();
+    }//end logout
 
     services_login.load_menu();
     services_search.get_category();

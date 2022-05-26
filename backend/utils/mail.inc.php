@@ -46,7 +46,7 @@ class mail
         $email['to_email'] = $data['to_email'];
         $email['subject'] = 'Verify your account';
         $email['text'] = null;
-        $href = SITE_PATH . "login/view/verify/" . $data['token'];
+        $href = SITE_PATH . "#/verify/" . $data['token'];
         $email['html'] = '<p>To verify your account you need to click <a href="' . $href . '">HERE</a></p>';
         $email['custom_id'] = 'Verify';
         return self::send_email($email);
@@ -61,7 +61,7 @@ class mail
         $email['to_email'] = $data['to_email'];
         $email['subject'] = 'Change your password ';
         $email['text'] = null;
-        $href = SITE_PATH . "login/view/recover/" . $data['token'];
+        $href = SITE_PATH . "#/recover/" . $data['token'];
         $email['html'] = '<p>To change your password you need to click <a href="' . $href . '">HERE</a></p>';
         $email['custom_id'] = 'Verify';
         return self::send_email($email);
