@@ -1,10 +1,20 @@
 app.factory('services_login', ['services', '$rootScope', 'toastr', '$window', 'services_localstorage', function (services, $rootScope, toastr, $window, services_localstorage) {
-    var services_login = { load_menu: load_menu, register_validate: register_validate, verify: verify, login: login, logout: logout };
+    var services_login = {
+        load_menu: load_menu,
+        register_validate: register_validate,
+        verify: verify,
+        login: login,
+        logout: logout,
+        recover_send_email: recover_send_email,
+        change_password: change_password,
+        user_control: user_control,
+        refresh_token_cookies: refresh_token_cookies,
+        user_timeout: user_timeout
+    };
     return services_login;
 
     function load_menu() {
         if (localStorage.getItem('token')) {
-            //$rootScope.menutype = 'user';
             get_user_data();
             $rootScope.menutype = 'user';
         } else {
@@ -68,8 +78,8 @@ app.factory('services_login', ['services', '$rootScope', 'toastr', '$window', 's
                 if (response == '"error"') {
                     $rootScope.login_error = 2;
                 } else {
+                    $rootScope.login_error = null;
                     toastr.success('Login successful.');
-                    response = response.substring(1, response.length - 1);
                     services_localstorage.new_sesion(response);
                     setTimeout(function () {
                         $window.location.href = "#/home";
@@ -108,5 +118,72 @@ app.factory('services_login', ['services', '$rootScope', 'toastr', '$window', 's
                     $rootScope.callback_error("post_logout_error");
                 })//end post
     }//end logout
+
+
+    function recover_send_email(email) {
+        services.post('login', 'send_email_recover', { 'email': email })
+            .then(function (response) {
+                if (response == '"ok"') {
+                    toastr.success('Email send successful.');
+                } else {
+                    toastr.error('An error has occurred.');
+                }//end else if
+            },
+                function (error) {
+                    $rootScope.callback_error("post_recover_send_email_error");
+                })//end post
+    }//end recover_send_email
+
+    function change_password(token, password) {
+        services.post('login', 'update_password_recover', { 'token': token, 'password': password })
+            .then(function (response) {
+                if (response == '"ok"') {
+                    toastr.success('Password change successful.');
+                    setTimeout(function () {
+                        $window.location.href = "#/login";
+                    }, 3000);
+                } else {
+                    toastr.error('An error has occurred.');
+                }//end else if
+            },
+                function (error) {
+                    $rootScope.callback_error("post_change_password_error");
+                })//end post
+    }//end change_password
+
+    function user_control() {
+        services.post('login', 'user_control', { 'token': localStorage.getItem('token') })
+            .then(function (response) {
+                if (response != '"ok"') {
+                    toastr.warning('Your session will be closed.');
+                    setTimeout(function () {
+                        logout();
+                    }, 1500);//end setTimeout
+                }//end if
+            },
+                function (error) {
+                    $rootScope.callback_error("post_user_control_error");
+                })//end post
+    }//end user_control
+
+    function refresh_token_cookies() {
+        services.post('login', 'refresh_token_cookies', { 'token': localStorage.getItem('token') })
+            .then(function (response) {
+                console.log(response);
+            },
+                function (error) {
+                    $rootScope.callback_error("post_refresh_token_cookies_error");
+                })//end post
+    }//refresh_token_cookies
+
+    function user_timeout() {
+        services.post('login', 'user_timeout')
+            .then(function (response) {
+                console.log(response);
+            },
+                function (error) {
+                    $rootScope.callback_error("post_user_timeout_error");
+                })//end post
+    }//end user_timeout
 
 }]);//end services_login

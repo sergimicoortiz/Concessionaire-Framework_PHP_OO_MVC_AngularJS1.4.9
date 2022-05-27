@@ -3,6 +3,7 @@ app.factory('services_localstorage', function () {
     return services_localstorage;
 
     function new_sesion(jwt) {
+        jwt = jwt.substring(1, jwt.length - 1);
         localStorage.setItem('token', jwt);
     }//end new_sesion
 

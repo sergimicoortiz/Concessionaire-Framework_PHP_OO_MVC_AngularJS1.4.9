@@ -1,3 +1,38 @@
-<br><br><br>
-<span class="titels" style="display: block;">RECOVER WIP</span>
-<br><br><br>
+<div ng-if="!recover_token">
+    <form id="recover_email_form" method="post" class="form" name="recover_email_form">
+        <fieldset>
+            <label for="email"><input type="text" placeholder="Email" name="email" id="email" ng-pattern="email_regex"
+                    required ng-model="email_recover"></label>
+            <span class="errors"
+                ng-show="recover_email_form.email.$invalid && !recover_email_form.email.$error.required ">The
+                email format is incorrect.</span>
+            </label><br>
+            <button class="button" ng-click="recover_email()"
+                ng-disabled="recover_email_form.email.$invalid || recover_email_form.email.$error.required">Send</button>
+        </fieldset>
+    </form>
+</div>
+
+<div ng-if="recover_token">
+    <form id="recover_password_form" method="post" class="form" name="recover_password_form">
+        <fieldset>
+            <label for="password_recover_1">
+                <input type="password" placeholder="Password" name="password_recover_1" id="password_recover_1" required
+                    ng-model="password_recover_1" ng-minlength="8">
+            </label>
+            <label for="password_recover_2">
+                <input type="password" placeholder="Repeat the password" name="password_recover_2"
+                    id="password_recover_2" required ng-model="password_recover_2" ng-minlength="8">
+            </label>
+            <span class="errors"
+                ng-show="(recover_password_form.password_recover_2.$invalid || recover_password_form.password_recover_1.$invalid) && (recover_password_form.password_recover_2.$dirty || recover_password_form.password_recover_1.$dirty)">*The
+                password needs to be minimum 8 characters long.</span>
+            <span class=" errors"
+                ng-show="recover_password_form.password_recover_1.$viewValue != recover_password_form.password_recover_2.$viewValue && recover_password_form.password_recover_2.$valid && recover_password_form.password_recover_1.$valid">*The
+                passwords aren't the same.</span>
+            <br>
+            <button class="button" ng-click="recover_password()"
+                ng-disabled="recover_password_form.password_recover_1.$viewValue != recover_password_form.password_recover_2.$viewValue || recover_password_form.password_recover_2.$error.required || recover_password_form.password_recover_1.$error.required || recover_password_form.password_recover_2.$invalid || recover_password_form.password_recover_1.$invalid">Send</button>
+        </fieldset>
+    </form>
+</div>

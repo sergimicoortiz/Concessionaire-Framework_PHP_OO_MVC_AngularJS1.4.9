@@ -109,11 +109,8 @@ app.run(function ($rootScope, $window, services_search, services_login) {
         return arr_group;
     }//end array_divider
 
-    $rootScope.logout = function () {
-        services_login.logout();
-    }//end logout
+    ////SEARCH////
 
-    services_login.load_menu();
     services_search.get_category();
 
     $rootScope.search_change_category = function () {
@@ -149,5 +146,34 @@ app.run(function ($rootScope, $window, services_search, services_login) {
         }//end else if
 
     }//end select_city
+
+    ////LOGIN////
+
+    $rootScope.logout = function () {
+        services_login.logout();
+    }//end logout
+
+    services_login.load_menu();
+
+    setInterval(function () {
+        if (!localStorage.getItem('time_interval')) {
+            localStorage.setItem('time_interval', 0);
+        }
+        const time = 5000 + parseInt(localStorage.getItem('time_interval'));
+        localStorage.setItem('time_interval', time);
+        if (localStorage.getItem('time_interval') >= 6000) { //600000 default
+            localStorage.setItem('time_interval', 0);
+            if (localStorage.getItem('token')) {
+                services_login.user_timeout();
+                services_login.refresh_token_cookies();
+            }
+        }
+    }, 5000)//end interval
+
+    $rootScope.$on('$routeChangeSuccess', function () {
+        if (localStorage.getItem('token')) {
+            services_login.user_control();
+        }//end if
+    });
 
 });//end run
