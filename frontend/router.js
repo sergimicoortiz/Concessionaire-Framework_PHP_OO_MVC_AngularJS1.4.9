@@ -73,7 +73,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         .otherwise("/home")//end default
 }]);//end config
 
-app.run(function ($rootScope, $window, services_search, services_login) {
+app.run(function ($rootScope, $window, services_search, services_login, services_shop) {
 
     $rootScope.error_callback = function (error_msg, error_type = "503") {
         var callback = "#/error/" + error_type + "/" + error_msg;
@@ -161,7 +161,7 @@ app.run(function ($rootScope, $window, services_search, services_login) {
         }
         const time = 5000 + parseInt(localStorage.getItem('time_interval'));
         localStorage.setItem('time_interval', time);
-        if (localStorage.getItem('time_interval') >= 6000) { //600000 default
+        if (localStorage.getItem('time_interval') >= 600000) { //600000 default
             localStorage.setItem('time_interval', 0);
             if (localStorage.getItem('token')) {
                 services_login.user_timeout();
@@ -171,8 +171,10 @@ app.run(function ($rootScope, $window, services_search, services_login) {
     }, 5000)//end interval
 
     $rootScope.$on('$routeChangeSuccess', function () {
+        //console.log('rootScope $routeChangeSuccess');
         if (localStorage.getItem('token')) {
             services_login.user_control();
+            services_shop.get_user_likes();
         }//end if
     });
 

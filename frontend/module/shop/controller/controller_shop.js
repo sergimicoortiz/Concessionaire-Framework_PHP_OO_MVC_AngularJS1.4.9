@@ -1,5 +1,6 @@
 app.controller('controller_shop', function ($scope, $rootScope, $window, toastr, services_shop, services_filters, services_map, brands, categorys, fuels, citys) {
     $rootScope.loadIn();
+    localStorage.setItem('url_callback', $window.location.hash);
     services_shop.load_cars();
     services_filters.get_filters();
     $scope.brands_shop = brands;

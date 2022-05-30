@@ -82,7 +82,13 @@ app.factory('services_login', ['services', '$rootScope', 'toastr', '$window', 's
                     toastr.success('Login successful.');
                     services_localstorage.new_sesion(response);
                     setTimeout(function () {
-                        $window.location.href = "#/home";
+                        if (localStorage.getItem('url_callback')) {
+                            var callback = localStorage.getItem('url_callback')
+                            localStorage.removeItem('url_callback')
+                        } else {
+                            var callback = '#/home';
+                        }//end else if
+                        $window.location.href = callback;
                         $window.location.reload();
                     }, 3000);
                 }//end else if
@@ -108,6 +114,7 @@ app.factory('services_login', ['services', '$rootScope', 'toastr', '$window', 's
             .then(function (response) {
                 if (response == '"ok"') {
                     services_localstorage.delete_sesion();
+                    localStorage.removeItem('user_likes')
                     $window.location.href = "#/home";
                     $window.location.reload();
                 } else {
@@ -169,7 +176,14 @@ app.factory('services_login', ['services', '$rootScope', 'toastr', '$window', 's
     function refresh_token_cookies() {
         services.post('login', 'refresh_token_cookies', { 'token': localStorage.getItem('token') })
             .then(function (response) {
-                console.log(response);
+                if (response == '"error"') {
+                    toastr.warning('Your session will be closed.');
+                    setTimeout(function () {
+                        logout();
+                    }, 1500);//end setTimeout
+                } else {
+                    services_localstorage.new_sesion(response);
+                }//end else if
             },
                 function (error) {
                     $rootScope.callback_error("post_refresh_token_cookies_error");
@@ -179,7 +193,12 @@ app.factory('services_login', ['services', '$rootScope', 'toastr', '$window', 's
     function user_timeout() {
         services.post('login', 'user_timeout')
             .then(function (response) {
-                console.log(response);
+                if (response != '"ok"') {
+                    toastr.warning('Your session will be closed.');
+                    setTimeout(function () {
+                        logout();
+                    }, 1500);//end setTimeout
+                }//end if
             },
                 function (error) {
                     $rootScope.callback_error("post_user_timeout_error");

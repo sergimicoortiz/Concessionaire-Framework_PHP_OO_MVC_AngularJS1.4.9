@@ -1,11 +1,55 @@
-app.factory('services_shop', ['services', '$rootScope', '$window', 'services_map', function (services, $rootScope, $window, services_map) {
-    let service_shop = { load_cars: load_cars, get_car_details: get_car_details, like: like };
+app.factory('services_shop', ['services', '$rootScope', '$window', 'services_map', 'toastr', function (services, $rootScope, $window, services_map, toastr) {
+    let service_shop = { load_cars: load_cars, get_car_details: get_car_details, like: like, get_user_likes: get_user_likes };
     return service_shop;
 
     function car_has_like(car) {
+        if (localStorage.getItem('token')) {
+            var user_likes = JSON.parse(localStorage.getItem('user_likes'));
+            if (user_likes.includes(car.car_id)) {
+                car['like'] = true;
+                return car;
+            }//end if
+        }//end if  
         car['like'] = false;
         return car;
     }//end  car_has_like
+
+    function get_user_likes() {
+        services.post('shop', 'get_user_likes', { token: localStorage.getItem('token') })
+            .then(function (response) {
+                if (response == '"error"') {
+                    $rootScope.error_callback("post_get_user_likes_error_data");
+                } else {
+                    //console.log(response);
+                    localStorage.setItem('user_likes', JSON.stringify(response));
+                }//end else if
+            },
+                function (error) {
+                    $rootScope.error_callback("post_get_user_likes_error");
+                })//end post
+    }//end get_user_likes
+
+    function like(car_id) {
+        if (localStorage.getItem('token')) {
+            services.post('shop', 'user_like', { token: localStorage.getItem('token'), car_id: car_id })
+                .then(function (response) {
+                    if (response) {
+                        angular.element(document.getElementById('heart_' + car_id)).toggleClass('heart-active');
+                    } else {
+                        $rootScope.error_callback("post_user_like_error_data");
+                    }//end else if
+                },
+                    function (error) {
+                        $rootScope.error_callback("post_like_error");
+                    })//end post
+        } else {
+            toastr.warning('Your need to be loged to do this.');
+            setTimeout(function () {
+                $window.location.href = '#/login';
+            }, 1500)
+        }//end else if
+    }//end like
+
 
     function add_car_map(car_list) {
         car_list.forEach(car => {
@@ -119,11 +163,4 @@ app.factory('services_shop', ['services', '$rootScope', '$window', 'services_map
                     $rootScope.error_callback("post_shop_cars_related_error");
                 })//end post
     }//end get_cars_related
-
-    function like(car_id) {
-        var callback = $window.location.hash;
-        console.log(callback);
-        console.log(car_id);
-    }//end like
-
 }]);//end services_shop

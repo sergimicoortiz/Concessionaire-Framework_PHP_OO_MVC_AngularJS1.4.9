@@ -9,7 +9,7 @@
             </slide>
         </carousel>
         <div id="detail_content">
-            <div class="heart" ng-class="{'heart-active': car_details.like}" ng-click="car_like_details()"></div>
+            <div id="heart_{{car_details.car_id}}" class="heart" ng-class="{'heart-active': car_details.like}" ng-click="car_like_details()"></div>
             <p><span data-tr="brand_name">brand</span>: <span class="text-detail">{{car_details.brand_name}}</span></p>
             <p><span data-tr="model_name">model</span>: <span class="text-detail">{{car_details.model_name}}</span></p>
             <p><span data-tr="price">price</span>: <span class="text-detail">{{car_details.price}} €</span></p>
@@ -43,7 +43,7 @@
                 <p class="upper"><b data-tr="view_count">View count</b>: {{car_related.view_count}}</p>
                 <p class="upper"><b data-tr="extres">extres</b>: {{car_related.extres_formated}}</p><a
                     href="#/shop/details/{{car_related.car_id}}" class="button" data-tr="See More">See More</a>
-                <div class="heart" ng-class="{'heart-active': car_related.like}" ng-click="car_like_related()"></div>
+                <div id="heart_{{car_related.car_id}}" class="heart" ng-class="{'heart-active': car_related.like}" ng-click="car_like_related()"></div>
             </div>
         </div>
     </div>

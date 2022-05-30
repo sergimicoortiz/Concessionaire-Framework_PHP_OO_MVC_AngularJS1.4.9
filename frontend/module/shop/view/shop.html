@@ -66,7 +66,7 @@
             <p class="upper"><b data-tr="view_count">View count</b>: <span>{{car.view_count}}</span></p>
             <p class="upper"><b data-tr="extres">extres</b>: <span>{{car.extres_formated}}</span></p>
             <a href="#/shop/details/{{car.car_id}}" class="button" data-tr="See More">See More</a>
-            <div class="heart" ng-class="{'heart-active': car.like}" ng-click="car_like_shop()"></div>
+            <div id="heart_{{car.car_id}}" class="heart" ng-class="{'heart-active': car.like}" ng-click="car_like_shop()"></div>
         </div>
     </div>
 </div>
