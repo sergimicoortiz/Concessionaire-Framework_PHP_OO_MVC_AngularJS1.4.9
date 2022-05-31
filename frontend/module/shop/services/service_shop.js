@@ -43,6 +43,7 @@ app.factory('services_shop', ['services', '$rootScope', '$window', 'services_map
                         $rootScope.error_callback("post_like_error");
                     })//end post
         } else {
+            localStorage.setItem('url_callback', $window.location.hash);
             toastr.warning('Your need to be loged to do this.');
             setTimeout(function () {
                 $window.location.href = '#/login';

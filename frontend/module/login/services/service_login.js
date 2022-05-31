@@ -45,7 +45,7 @@ app.factory('services_login', ['services', '$rootScope', 'toastr', '$window', 's
                     toastr.success('Register successful, please cech your email to verify your account.');
                     setTimeout(function () {
                         $window.location.href = "#/home";
-                    }, 3000);
+                    }, 2000);
                 } else {
                     toastr.error('An error has occurred.');
                 }//end else if
@@ -90,7 +90,7 @@ app.factory('services_login', ['services', '$rootScope', 'toastr', '$window', 's
                         }//end else if
                         $window.location.href = callback;
                         $window.location.reload();
-                    }, 3000);
+                    }, 2000);
                 }//end else if
             },
                 function (error) {
@@ -148,7 +148,7 @@ app.factory('services_login', ['services', '$rootScope', 'toastr', '$window', 's
                     toastr.success('Password change successful.');
                     setTimeout(function () {
                         $window.location.href = "#/login";
-                    }, 3000);
+                    }, 2000);
                 } else {
                     toastr.error('An error has occurred.');
                 }//end else if

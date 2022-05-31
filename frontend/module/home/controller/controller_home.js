@@ -20,7 +20,8 @@ app.controller('controller_home', function ($scope, $rootScope, $window, brands,
         }//end if
     });//end foreach 
 
-    var books_group = $rootScope.array_divider(books_all, 4, false);
+    var books_group = $rootScope.array_divider(books_all, 4, true);
+    //console.log(books_all);
     $scope.books_group = books_group.slice(0, book_cont);
     //console.log(books_group);
 

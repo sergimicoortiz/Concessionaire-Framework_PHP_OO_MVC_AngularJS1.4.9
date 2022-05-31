@@ -1,6 +1,5 @@
 app.controller('controller_shop_details', function ($scope, $rootScope, $routeParams, $window, services_shop, services_map) {
     $rootScope.loadIn();
-    localStorage.setItem('url_callback', $window.location.hash);
     services_shop.get_car_details($routeParams.car_id);
     $scope.myInterval = 4000;
     $scope.noWrapSlides = false;

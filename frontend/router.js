@@ -153,12 +153,10 @@ app.run(function ($rootScope, $window, services_search, services_login, services
         services_login.logout();
     }//end logout
 
-    services_login.load_menu();
-
     setInterval(function () {
         if (!localStorage.getItem('time_interval')) {
             localStorage.setItem('time_interval', 0);
-        }
+        }//end if
         const time = 5000 + parseInt(localStorage.getItem('time_interval'));
         localStorage.setItem('time_interval', time);
         if (localStorage.getItem('time_interval') >= 600000) { //600000 default
@@ -166,12 +164,13 @@ app.run(function ($rootScope, $window, services_search, services_login, services
             if (localStorage.getItem('token')) {
                 services_login.user_timeout();
                 services_login.refresh_token_cookies();
-            }
-        }
+            }//end if
+        }//end if
     }, 5000)//end interval
 
     $rootScope.$on('$routeChangeSuccess', function () {
         //console.log('rootScope $routeChangeSuccess');
+        services_login.load_menu();
         if (localStorage.getItem('token')) {
             services_login.user_control();
             services_shop.get_user_likes();
