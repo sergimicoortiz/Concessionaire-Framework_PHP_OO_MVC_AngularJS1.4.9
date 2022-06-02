@@ -19,7 +19,7 @@ app.controller('controller_shop_details', function ($scope, $rootScope, $routePa
     $scope.scroll_related = function () {
         $rootScope.related_cont++;
         $rootScope.cars_related_group = $rootScope.cars_related_all.slice(0, $rootScope.related_cont * 1);
-
     }//end scroll_related
+    
     $rootScope.loadOut();
 });//end controller

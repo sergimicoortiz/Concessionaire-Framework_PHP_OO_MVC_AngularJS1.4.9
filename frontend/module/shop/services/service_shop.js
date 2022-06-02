@@ -51,7 +51,6 @@ app.factory('services_shop', ['services', '$rootScope', '$window', 'services_map
         }//end else if
     }//end like
 
-
     function add_car_map(car_list) {
         car_list.forEach(car => {
             services_map.add_pointer(car, car.img, false);
