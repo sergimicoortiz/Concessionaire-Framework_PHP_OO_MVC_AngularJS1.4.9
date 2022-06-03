@@ -23,7 +23,6 @@ app.factory('services_login', ['services', '$rootScope', 'toastr', '$window', 's
     }//end load_menu
 
     function register_validate(form_data) {
-        //console.log(form_data);
         services.post('login', 'validate_user', form_data)
             .then(function (response) {
                 if (response[0]['cont'] == 1) {
@@ -132,6 +131,9 @@ app.factory('services_login', ['services', '$rootScope', 'toastr', '$window', 's
             .then(function (response) {
                 if (response == '"ok"') {
                     toastr.success('Email send successful.');
+                    setTimeout(function () {
+                        $window.location.href = "#/home";
+                    }, 2000);
                 } else {
                     toastr.error('An error has occurred.');
                 }//end else if

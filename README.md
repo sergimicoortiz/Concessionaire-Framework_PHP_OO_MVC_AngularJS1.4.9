@@ -34,9 +34,9 @@ A website that i created for my first year being a student of DAW (Desarrollo de
 [ng-infinite-scroll]: <https://www.npmjs.com/package/ng-infinite-scroll>
 [ui.bootstrap]: <https://angular-ui.github.io/bootstrap/>
 
-## FEATURES
+## MODULES
 
-| Page | Features |
+| Module | Description |
 |---------|-------------|
 | Home | A home with a carrousel and books from the Google api. |
 | Shop | Shop witch includes a filter system and a map from [BoxMap]. The car details also includes a map and have a more related. The details have a carousel.|

@@ -20,7 +20,6 @@ app.factory('services_shop', ['services', '$rootScope', '$window', 'services_map
                 if (response == '"error"') {
                     $rootScope.error_callback("post_get_user_likes_error_data");
                 } else {
-                    //console.log(response);
                     localStorage.setItem('user_likes', JSON.stringify(response));
                 }//end else if
             },
@@ -139,7 +138,6 @@ app.factory('services_shop', ['services', '$rootScope', '$window', 'services_map
                     get_cars_related(car_tmp);
                     services_map.add_map([car_tmp.lon, car_tmp.lat], 8)
                     services_map.add_pointer(car_tmp, img_tmp[0]);
-                    //console.log(car_tmp);
                     $rootScope.car_details = car_tmp;
                     $rootScope.car_details_img = img_tmp;
                 }//end else if
@@ -153,7 +151,6 @@ app.factory('services_shop', ['services', '$rootScope', '$window', 'services_map
         const filters_related = [['b.brand_name', car.brand_name]];
         services.post('shop', 'list_cars_filters', { "f_data": filters_related })
             .then(function (response) {
-                //console.log(response);
                 $rootScope.related_cont = 1;
                 $rootScope.cars_related_all = car_tractament(response, car.car_id);
                 $rootScope.cars_related_group = $rootScope.cars_related_all.slice(0, $rootScope.related_cont * 1);

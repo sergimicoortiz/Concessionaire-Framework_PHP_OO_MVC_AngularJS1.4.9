@@ -45,7 +45,6 @@ app.factory('services_filters', ['services', '$rootScope', function (services, $
         });//end foreach
 
         const filters = { price: f_price, brand: f_brand, category: f_category, fuel: f_fuel, city: f_city, view_count: f_view_count };
-        //console.log(filters);
         $rootScope.filters = filters;
     }//end get filters
 

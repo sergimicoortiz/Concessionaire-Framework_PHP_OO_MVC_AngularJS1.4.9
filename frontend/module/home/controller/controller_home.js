@@ -21,14 +21,11 @@ app.controller('controller_home', function ($scope, $rootScope, $window, brands,
     });//end foreach 
 
     var books_group = $rootScope.array_divider(books_all, 4, true);
-    //console.log(books_all);
     $scope.books_group = books_group.slice(0, book_cont);
-    //console.log(books_group);
 
     $scope.more_books = function () {
         book_cont++;
         if (book_cont = books_group.length) {
-            //console.log('No more books');
             document.querySelector('#see_more_books').remove();
         }//end if
         $scope.books_group = books_group.slice(0, book_cont);
@@ -39,19 +36,16 @@ app.controller('controller_home', function ($scope, $rootScope, $window, brands,
         try {
             data_fileters.push(['b.brand_name', this.brand.brand_name])
         } catch (error) {
-            //console.log("catch brand");
         }//end trycatch brand
 
         try {
             data_fileters.push(['cat.category_name', this.category.category_name])
         } catch (error) {
-            //console.log("catch category");
         }//end trycatch category
 
         try {
             data_fileters.push(['f.fuel_type_name', this.fuel.fuel_type_name])
         } catch (error) {
-            //console.log("catch fuel");
         }//end trycatch fuel
 
         localStorage.setItem('filters', JSON.stringify(data_fileters));

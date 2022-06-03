@@ -15,7 +15,6 @@ app.factory('services_social_login', ['services', '$rootScope', 'toastr', '$wind
             firebase.initializeApp(config_firebase);
         }
 
-
         switch (method) {
             case 'google':
                 var authService = firebase.auth();
@@ -26,7 +25,6 @@ app.factory('services_social_login', ['services', '$rootScope', 'toastr', '$wind
                         login(result);
                     })
                     .catch(function (error) {
-                        //console.log(error);
                         toastr.error('An error has occurred. Maybe the email or the username are alredy in use.');
                     });//end firebase
                 break;
@@ -39,7 +37,6 @@ app.factory('services_social_login', ['services', '$rootScope', 'toastr', '$wind
                         login(result);
                     })
                     .catch(function (error) {
-                        //console.log(error);
                         toastr.error('An error has occurred. Maybe the email or the username are alredy in use.');
                     });//end firebase
                 break;
@@ -59,7 +56,6 @@ app.factory('services_social_login', ['services', '$rootScope', 'toastr', '$wind
         const user = { 'username': username, 'email': email, 'profile': profile, 'user_id': user_id, "provider": provider };
         services.post('login', 'social_singin', user)
             .then(function (response) {
-                //console.log(response);
                 if (response == '"error"') {
                     toastr.error('An error has occurred. Maybe the email or the username are alredy in use.');
                 } else if (response == '"error_insert"') {

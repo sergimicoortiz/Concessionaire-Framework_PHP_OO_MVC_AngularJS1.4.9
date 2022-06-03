@@ -169,7 +169,6 @@ app.run(function ($rootScope, $window, services_search, services_login, services
     }, 5000)//end interval
 
     $rootScope.$on('$routeChangeSuccess', function () {
-        //console.log('rootScope $routeChangeSuccess');
         services_login.load_menu();
         if (localStorage.getItem('token')) {
             services_login.user_control();

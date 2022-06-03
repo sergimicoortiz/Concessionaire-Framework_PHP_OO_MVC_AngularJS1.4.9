@@ -37,7 +37,6 @@ app.factory("services", ['$http', '$q', function ($http, $q) {
             method: 'GET',
             url: serviceBase + module + '&op=' + functi + '&param=' + dada
         }).success(function (data, status, headers, config) {
-            console.log(data);
             defered.resolve(data);
         }).error(function (data, status, headers, config) {
             defered.reject(data);
@@ -52,7 +51,6 @@ app.factory("services", ['$http', '$q', function ($http, $q) {
             method: 'GET',
             url: serviceBase + module + '&op=' + functi + '&param=' + dada + '&param2=' + dada2
         }).success(function (data, status, headers, config) {
-            //console.log(data);
             defered.resolve(data);
         }).error(function (data, status, headers, config) {
             defered.reject(data);
@@ -97,7 +95,6 @@ app.factory("services", ['$http', '$q', function ($http, $q) {
             method: 'DELETE',
             url: serviceBase + module + '&op=' + functi + '&param=' + dada
         }).success(function (data, status, headers, config) {
-            //console.log(data);
             defered.resolve(data);
         }).error(function (data, status, headers, config) {
             defered.reject(data);

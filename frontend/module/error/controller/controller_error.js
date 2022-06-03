@@ -5,10 +5,5 @@ app.controller('controller_error', function ($scope, services, $routeParams) {
     }//end if
     $scope.error_img = error_type;
     var error_data = { 'type': error_type, 'msg': $routeParams.error_msg };
-    services.post('error', 'send_error', error_data)
-        .then(function (response) {
-            //console.log(response);
-        }, function (error) {
-            //console.log(error);
-        })//end post
+    services.post('error', 'send_error', error_data);
 });//end controller
